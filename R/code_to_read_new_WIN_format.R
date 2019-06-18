@@ -52,7 +52,7 @@ conv_l_or_g <- function(x){
   ifelse(str_detect(x, "^<"), as.numeric(sapply(str_split(x, "<"),
                                                 function(x) x[2]))/2,
          ifelse(str_detect(x, "^>"), as.numeric(sapply(str_split(x, ">"),
-                                                       function(x) x[2]))/2,
+                                                       function(x) x[2])),
                 as.numeric(x)))
   }
 
