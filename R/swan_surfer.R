@@ -43,6 +43,7 @@
 #' @import scales
 #' @import grid
 #' @import gridExtra
+#' @import gtable gtable_add_padding
 #' @import metR
 #' @import ggpubr
 #' @importFrom lubridate ymd
@@ -155,8 +156,10 @@ swan_surfR <- function(path){
     salPlot <- ggplot()+
       geom_raster(data = idw_list_a[[1]],
                   aes(x=x, y=y, fill = factor(Salinity))) +
-      scale_x_continuous(limits = c(-1, 52.5),
-                         expand = c(0, 0)) +
+      scale_x_continuous(limits = c(-1, 51.6),
+                         expand = c(0, 0),
+                         breaks = seq(0, 50, by = 5)) +
+      scale_y_continuous(expand = expand_scale(mult = c(0, .05))) +
       stat_contour2(data = idw_list_a[[1]], aes(x=x, y=y, z = Salinity),
                     colour = "grey50",
                     breaks = MakeBreaks(binwidth = 2)) +
@@ -176,19 +179,21 @@ swan_surfR <- function(path){
                  colour = "black",
                  size = 0.5) +
       geom_text(data = site_labs,
-                aes(x = dist_mouth/1000, y = 0.7, label = site),
+                aes(x = dist_mouth/1000, y = 0.7, label = site, fontface=2),
                 size = 4.5,
                 colour = "black",
                 alpha = 1,
                 check_overlap = TRUE) +
       annotate("text",
                label = "Salinity (ppt)",
-               x = 26.5,
-               y = -20,
-               size = 7,
+               x = 21,
+               y = -17.8,
+               size = 9,
                fontface =2,
                colour = "black") +
-      labs(y = "") +
+      labs(title = paste("Swan River Estuary - Physical-Chemical Profile -",
+                         format(ymd(pair), "%d %b %Y")),
+           y = "") +
       theme(panel.grid.major = element_blank(),
             panel.grid.minor = element_blank(),
             panel.background = element_blank(),
@@ -196,11 +201,11 @@ swan_surfR <- function(path){
             axis.line.x = element_blank(),
             axis.line.y = element_blank(),
             axis.ticks.x = element_blank(),
-            axis.title = element_text(size = 17),
-            axis.text = element_text(size = 16),
+            axis.title = element_text(size = 20),
+            axis.text = element_text(size = 18),
             axis.text.x = element_blank(),
             axis.title.x = element_blank(),
-            plot.title = element_text(hjust=0.5, vjust=0.5, face='bold', size = 24),
+            plot.title = element_text(hjust=0.5, vjust=0.5, face='bold', size = 28),
             plot.subtitle = element_text(hjust=0.5, vjust=0.5, size = 22),
             panel.border=element_blank(),
             legend.background = element_rect(fill = "lightgray"),
@@ -215,6 +220,10 @@ swan_surfR <- function(path){
     salPlotZ <- ggplot()+
       geom_raster(data = idw_list_n[[1]],
                   aes(x=x, y=y, fill = factor(Salinity))) +
+      scale_x_continuous(limits = c(20.85,51.6),
+                         expand = c(0, 0),
+                         breaks = c(25, 30, 35, 40, 45, 50)) +
+      scale_y_continuous(expand = expand_scale(mult = c(0, .05))) +
       stat_contour2(data = idw_list_n[[1]],
                     aes(x=x, y=y, z = Salinity),
                     colour = "grey50",
@@ -235,19 +244,21 @@ swan_surfR <- function(path){
                  colour = "black",
                  size = 0.5) +
       geom_text(data = filter(site_labs, dist_mouth/1000 >= 21),
-                aes(x = dist_mouth/1000, y = 0.7, label = site),
+                aes(x = dist_mouth/1000, y = 0.7, label = site, fontface=2),
                 size = 4.5,
                 colour = "black",
                 alpha = 1,
                 check_overlap = TRUE) +
       annotate("text",
                label = "Salinity (ppt)",
-               x = 32,
-               y = -9,
-               size = 7,
+               x = 34,
+               y = -8,
+               size = 9,
                fontface =2,
                colour = "black") +
-      labs(y = "") +
+      labs(title =paste("Middle and Upper Swan River Estuary - Physical-Chemical Profile -",
+                        format(lubridate::ymd(pair), "%d %b %Y")),
+                        y = "") +
       theme(panel.grid.major = element_blank(),
             panel.grid.minor = element_blank(),
             panel.background = element_blank(),
@@ -255,16 +266,16 @@ swan_surfR <- function(path){
             axis.line.x = element_blank(),
             axis.line.y = element_blank(),
             axis.ticks.x = element_blank(),
-            axis.title = element_text(size = 17),
-            axis.text = element_text(size = 16),
+            axis.title = element_text(size = 20),
+            axis.text = element_text(size = 18),
             axis.text.x = element_blank(),
             axis.title.x = element_blank(),
-            plot.title = element_text(hjust=0.5, vjust=0.5, face='bold', size = 24),
+            plot.title = element_text(hjust=0.5, vjust=0.5, face='bold', size = 28),
             plot.subtitle = element_text(hjust=0.5, vjust=0.5, size = 22),
             panel.border=element_blank(),
             legend.background = element_rect(fill = "lightgray"),
             legend.direction = "horizontal",
-            legend.position = c(0.65, 0.22),
+            legend.position = c(0.70, 0.22),
             legend.key.size =  unit(8, "mm"),
             legend.text = element_text(size = 12),
             plot.margin=grid::unit(c(0,0,0,0), "mm")) +
@@ -273,8 +284,10 @@ swan_surfR <- function(path){
     doPlot <- ggplot()+
       geom_raster(data = idw_list_a[[2]],
                   aes(x=x, y=y, fill = factor(Dissolved_Oxygen))) +
-      scale_x_continuous(limits = c(-1, 52.5),
-                         expand = c(0, 0)) +
+      scale_x_continuous(limits = c(-1, 51.6),
+                         expand = c(0, 0),
+                         breaks = seq(0, 50, by = 5)) +
+      scale_y_continuous(expand = expand_scale(mult = c(0, .05))) +
       stat_contour2(data = idw_list_a[[2]],
                     aes(x=x, y=y, z = Dissolved_Oxygen),
                     colour = "grey50",
@@ -303,10 +316,10 @@ swan_surfR <- function(path){
                  shape = 24) +
       annotate("text",
                label = "Dissolved Oxygen (mg/L)",
-               x = 26.5,
-               y = -20,
-               size = 7,
-               fontface =2,
+               x = 21,
+               y = -18,
+               size = 9,
+               fontface = 2,
                colour = "black") +
       labs(y = "Depth (m)") +
       theme(panel.grid.major = element_blank(),
@@ -316,8 +329,8 @@ swan_surfR <- function(path){
             axis.line.x = element_blank(),
             axis.line.y = element_blank(),
             axis.ticks.x = element_blank(),
-            axis.title = element_text(size = 17),
-            axis.text = element_text(size = 16),
+            axis.title = element_text(size = 20),
+            axis.text = element_text(size = 18),
             axis.text.x = element_blank(),
             axis.title.x = element_blank(),
             plot.title = element_text(hjust=0.5, vjust=0.5, face='bold'),
@@ -335,6 +348,10 @@ swan_surfR <- function(path){
     doPlotZ <- ggplot()+
       geom_raster(data = idw_list_n[[2]],
                   aes(x=x, y=y, fill = factor(Dissolved_Oxygen))) +
+      scale_x_continuous(limits = c(20.85,51.6),
+                         expand = c(0, 0),
+                         breaks = c(25, 30, 35, 40, 45, 50)) +
+      scale_y_continuous(expand = expand_scale(mult = c(0, .05))) +
       stat_contour2(data = idw_list_n[[2]],
                     aes(x=x, y=y, z = Dissolved_Oxygen),
                     colour = "grey50",
@@ -363,10 +380,10 @@ swan_surfR <- function(path){
                  shape = 24) +
       annotate("text",
                label = "Dissolved Oxygen (mg/L)",
-               x = 32,
-               y = -9,
-               size = 7,
-               fontface =2,
+               x = 34,
+               y = -8,
+               size = 9,
+               fontface = 2,
                colour = "black") +
       labs(y = "Depth (m)") +
       theme(panel.grid.major = element_blank(),
@@ -376,8 +393,8 @@ swan_surfR <- function(path){
             axis.line.x = element_blank(),
             axis.line.y = element_blank(),
             axis.ticks.x = element_blank(),
-            axis.title = element_text(size = 17),
-            axis.text = element_text(size = 16),
+            axis.title = element_text(size = 20),
+            axis.text = element_text(size = 18),
             axis.text.x = element_blank(),
             axis.title.x = element_blank(),
             plot.title = element_text(hjust=0.5, vjust=0.5, face='bold'),
@@ -397,8 +414,10 @@ swan_surfR <- function(path){
       geom_raster(data = idw_list_a[[4]],
                   aes(x=x, y=y, fill = factor(Chlorophyll)),
                   alpha = 0.5) +
-      scale_x_continuous(limits = c(-1, 52.5),
-                         expand = c(0, 0)) +
+      scale_x_continuous(limits = c(-1, 51.6),
+                         expand = c(0, 0),
+                         breaks = seq(0, 50, by = 5)) +
+      scale_y_continuous(expand = expand_scale(mult = c(0, .05))) +
       stat_contour2(data = idw_list_a[[4]],
                     aes(x=x, y=y, z = Chlorophyll),
                     colour = "grey50",
@@ -423,9 +442,9 @@ swan_surfR <- function(path){
                  size = 0.5) +
       annotate("text",
                label = expression('bold(paste("Chlorophyll (", mu,"/L)"))'),
-               x = 26.5,
-               y = -20,
-               size = 7,
+               x = 21,
+               y = -18,
+               size = 9,
                fontface =2,
                colour = "black", parse = TRUE) +
       labs(x = "Distance From Entrance (km)",
@@ -437,8 +456,8 @@ swan_surfR <- function(path){
             axis.line.x = element_blank(),
             axis.line.y = element_blank(),
             axis.ticks.x = element_blank(),
-            axis.title = element_text(size = 17),
-            axis.text = element_text(size = 16),
+            axis.title = element_text(size = 20),
+            axis.text = element_text(size = 18),
             axis.text.x = element_blank(),
             axis.title.x = element_blank(),
             plot.title = element_text(hjust=0.5, vjust=0.5, face='bold', size = 24),
@@ -457,6 +476,10 @@ swan_surfR <- function(path){
       geom_raster(data = idw_list_n[[4]],
                   aes(x=x, y=y, fill = factor(Chlorophyll)),
                   alpha = 0.5) +
+      scale_x_continuous(limits = c(20.85,51.6),
+                         expand = c(0, 0),
+                         breaks = c(25, 30, 35, 40, 45, 50)) +
+      scale_y_continuous(expand = expand_scale(mult = c(0, .05)))+
       stat_contour2(data = idw_list_n[[4]],
                     aes(x=x, y=y, z = Chlorophyll),
                     colour = "grey50",
@@ -481,9 +504,9 @@ swan_surfR <- function(path){
                  size = 0.5) +
       annotate("text",
                label = expression('bold(paste("Chlorophyll (", mu,"/L)"))'),
-               x = 32,
-               y = -9,
-               size = 7,
+               x = 34,
+               y = -8,
+               size = 9,
                fontface =2,
                colour = "black", parse = TRUE) +
       labs(x = "Distance From Entrance (km)",
@@ -495,8 +518,8 @@ swan_surfR <- function(path){
             axis.line.x = element_blank(),
             axis.line.y = element_blank(),
             axis.ticks.x = element_blank(),
-            axis.title = element_text(size = 17),
-            axis.text = element_text(size = 16),
+            axis.title = element_text(size = 20),
+            axis.text = element_text(size = 18),
             axis.text.x = element_blank(),
             axis.title.x = element_blank(),
             plot.title = element_text(hjust=0.5, vjust=0.5, face='bold', size = 24),
@@ -514,8 +537,10 @@ swan_surfR <- function(path){
     tempPlot <- ggplot()+
       geom_raster(data = idw_list_a[[3]],
                   aes(x=x, y=y, fill = factor(Temperature))) +
-      scale_x_continuous(limits = c(-1, 52.5),
-                         expand = c(0, 0)) +
+      scale_x_continuous(limits = c(-1, 51.6),
+                         expand = c(0, 0),
+                         breaks = seq(0, 50, by = 5)) +
+      scale_y_continuous(expand = expand_scale(mult = c(0, .05))) +
       stat_contour2(data = idw_list_a[[3]],
                     aes(x=x, y=y, z = Temperature),
                     colour = "grey50",
@@ -536,9 +561,9 @@ swan_surfR <- function(path){
                  size = 0.5) +
       annotate("text",
                label = expression('bold(paste("Temperature (", degree,"C)"))'),
-               x = 26.5,
-               y = -20,
-               size = 7,
+               x = 21,
+               y = -17,
+               size = 9,
                fontface =2,
                colour = "black", parse = TRUE) +
       labs(x = "Distance From Entrance (km)",
@@ -548,8 +573,8 @@ swan_surfR <- function(path){
             panel.background = element_blank(),
             axis.line = element_line(colour = "black"),
             axis.line.y = element_blank(),
-            axis.title = element_text(size = 17),
-            axis.text = element_text(size = 16),
+            axis.title = element_text(size = 20),
+            axis.text = element_text(size = 18),
             plot.title = element_text(hjust=0.5, vjust=0.5, face='bold', size = 24),
             plot.subtitle = element_text(hjust=0.5, vjust=0.5, size = 22),
             panel.border=element_blank(),
@@ -565,6 +590,10 @@ swan_surfR <- function(path){
     tempPlotZ <- ggplot()+
       geom_raster(data = idw_list_n[[3]],
                   aes(x=x, y=y, fill = factor(Temperature))) +
+      scale_x_continuous(limits = c(20.85,51.6),
+                         expand = c(0, 0),
+                         breaks = c(25, 30, 35, 40, 45, 50)) +
+      scale_y_continuous(expand = expand_scale(mult = c(0, .05)))+
       stat_contour2(data = idw_list_n[[3]],
                     aes(x=x, y=y, z = Temperature),
                     colour = "grey50",
@@ -585,9 +614,9 @@ swan_surfR <- function(path){
                  size = 0.5) +
       annotate("text",
                label = expression('bold(paste("Temperature (", degree,"C)"))'),
-               x = 32,
-               y = -9,
-               size = 7,
+               x = 34,
+               y = -7.7,
+               size = 9,
                fontface =2,
                colour = "black", parse = TRUE) +
       labs(x = "Distance From Entrance (km)",
@@ -597,8 +626,8 @@ swan_surfR <- function(path){
             panel.background = element_blank(),
             axis.line = element_line(colour = "black"),
             axis.line.y = element_blank(),
-            axis.title = element_text(size = 17),
-            axis.text = element_text(size = 16),
+            axis.title = element_text(size = 20),
+            axis.text = element_text(size = 18),
             plot.title = element_text(hjust=0.5, vjust=0.5, face='bold', size = 24),
             plot.subtitle = element_text(hjust=0.5, vjust=0.5, size = 22),
             panel.border=element_blank(),
@@ -612,23 +641,40 @@ swan_surfR <- function(path){
       guides(fill = guide_legend(nrow = 2, byrow = TRUE))
 
 
-    surfers <- grid.arrange(salPlot, doPlot, chlorPlot, tempPlot, nrow = 4,
-                            top = textGrob(paste("Swan River Estuary - Physical-Chemical Profile -",
-                                                 format(ymd(pair), "%d %b %Y")),
-                                           gp = gpar(fontface = 2, fontsize = 22)))
+    # surfers <- grid.arrange(salPlot, doPlot, chlorPlot, tempPlot, nrow = 4,
+    #                         top = textGrob(paste("Swan River Estuary - Physical-Chemical Profile -",
+    #                                              format(ymd(pair), "%d %b %Y")),
+    #                                        gp = gpar(fontface = 2, fontsize = 30)),#22
+    #                         vp=viewport(width=0.95, height=0.95))
+
+    # for regualr plots
+    #create list of plotGrobs
+    plta <- lapply(list(salPlot, doPlot, chlorPlot, tempPlot), ggplotGrob)
+    #rbind (i.e. 1 column) size arg matters!
+    surfers <- rbind(plta[[1]], plta[[2]], plta[[3]], plta[[4]], size = "first")
     pdf_name <- paste0(path, "/plots/", "swan_", ymd(pair), "_surfer.pdf")
     cat(paste0(pdf_name,"\n"))
+    #add margin padding coarse but effective
+    surfers_pad <- gtable_add_padding(surfers, padding = unit(c(1,4,3,4), "cm"))
 
-    ggsave(plot = surfers, filename = pdf_name, width=28, height=18)
+    ggsave(plot = grid.draw(surfers_pad), filename = pdf_name, width=28, height=18)
+
+    # surfersZ <- grid.arrange(salPlotZ, doPlotZ, chlorPlotZ, tempPlotZ, nrow = 4,
+    #                          top = textGrob(paste("Middle and Upper Swan River Estuary - Physical-Chemical Profile -",
+    #                                               format(lubridate::ymd(pair), "%d %b %Y")),
+    #                                         gp = gpar(fontface = 2, fontsize = 28)),#22
+    #                          vp=viewport(width=0.95, height=0.95))
 
     # for zoomed at narrows
-    surfersZ <- grid.arrange(salPlotZ, doPlotZ, chlorPlotZ, tempPlotZ, nrow = 4,
-                             top = textGrob(paste("Middle and Upper Swan River Estuary - Physical-Chemical Profile -",
-                                                  format(lubridate::ymd(pair), "%d %b %Y")),
-                                            gp = gpar(fontface = 2, fontsize = 22)))
+    #create list of plotGrobs
+    pltb <- lapply(list(salPlotZ, doPlotZ, chlorPlotZ, tempPlotZ), ggplotGrob)
+    #rbind (i.e. 1 column) size arg matters!
+    surfersZ <- rbind(pltb[[1]], pltb[[2]], pltb[[3]], pltb[[4]], size = "first")
     pdf_nameZ <- paste0(path, "/plots/", "swan_middle_upper_", lubridate::ymd(pair), "_surfer.pdf")
     cat(paste0(pdf_nameZ,"\n"))
+    #add margin padding coarse but effective
+    surfersZ_pad <- gtable_add_padding(surfersZ, padding = unit(c(1,4,3,4), "cm"))
 
-    ggsave(plot = surfersZ, filename = pdf_nameZ, width=28, height=18)
+    ggsave(plot = grid.draw(surfersZ_pad), filename = pdf_nameZ, width=28, height=18)
   }
 }
