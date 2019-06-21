@@ -3,9 +3,11 @@
 #' Reads in external data, combines with internal datasets and produces Swan
 #' River surfer plots
 #'
-#' \code{swan_surfR} takes a file path to Swan River sonde output and creates
+#' \code{swan_surfR} takes a file path to Swan River sonde outputs and creates
 #'     a four panel (single column) surfer plot of salinity, dissolved oxygen,
-#'     chlorophyll a, and temperature in pdf format.
+#'     chlorophyll a, and temperature in pdf format. The funcion creates a
+#'     folder called "plots" in the file path to store the pdf's. Code expects
+#'     2 excel workbooks per weekly sonde run.
 #'
 #' Surfer plots display a
 #'     cross-section of the river where the metrics of interest have been
@@ -50,6 +52,11 @@
 swan_surfR <- function(path){
   locations <- data_finder(path, river = "s")
   data_pairs <- unique(substr(locations, nchar(path)+2, nchar(path)+9))
+  # make folder for output
+  folder <- file.path(path, "plots")
+  if (!file.exists(folder)) {
+    dir.create(folder)
+  }
 
   for(pair in data_pairs){
     pair_locs <- locations[grep(pair, locations)]
