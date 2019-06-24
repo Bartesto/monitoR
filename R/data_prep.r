@@ -28,7 +28,7 @@
 
 data_finder <- function(path, river){
   excels <- list.files(path = path, pattern = ".xlsx$")
-  excel_clean <- excels[str_detect(excels, "^\\d{8}")] #starts with digits only
+  excel_clean <- excels[stringr::str_detect(excels, "^\\d{8}")] #starts with digits only
   sorted <- if(river == "c"){
     out <- excel_clean[stringr::str_detect(excel_clean, "c")]
   } else {

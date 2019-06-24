@@ -43,7 +43,7 @@
 #' @import scales
 #' @import grid
 #' @import gridExtra
-#' @import gtable gtable_add_padding
+#' @import gtable
 #' @import metR
 #' @import ggpubr
 #' @importFrom lubridate ymd
@@ -153,8 +153,8 @@ swan_surfR <- function(path){
       dplyr::filter(site != "BWR" & site != "KMO" & site != "VIT")
 
     # construct pretty date
-    # sday <- just_nums(as.numeric(substr(pair, 7, 8)))
-    # sdate <- paste(sday, format(ymd(pair), "%b %Y"), sep = " ")
+    sday <- just_nums(as.numeric(substr(pair, 7, 8)))
+    sdate <- paste(sday, format(ymd(pair), "%b %Y"), sep = " ")
 
     ## Plots
     salPlot <- ggplot()+
@@ -196,8 +196,11 @@ swan_surfR <- function(path){
                fontface =2,
                colour = "black") +
       labs(title = paste("Swan River Estuary - Physical-Chemical Profile -",
-                         format(ymd(pair), "%d %b %Y")),
+                         sdate),
            y = "") +
+      # labs(title = paste("Swan River Estuary - Physical-Chemical Profile -",
+      #                    format(ymd(pair), "%d %b %Y")),
+      #      y = "") +
       theme(panel.grid.major = element_blank(),
             panel.grid.minor = element_blank(),
             panel.background = element_blank(),
@@ -260,9 +263,12 @@ swan_surfR <- function(path){
                size = 9,
                fontface =2,
                colour = "black") +
-      labs(title =paste("Middle and Upper Swan River Estuary - Physical-Chemical Profile -",
-                        format(ymd(pair), "%d %b %Y")),
-                        y = "") +
+      labs(title = paste("Swan River Estuary - Physical-Chemical Profile -",
+                         sdate),
+           y = "") +
+      # labs(title =paste("Middle and Upper Swan River Estuary - Physical-Chemical Profile -",
+      #                   format(ymd(pair), "%d %b %Y")),
+      #                   y = "") +
       theme(panel.grid.major = element_blank(),
             panel.grid.minor = element_blank(),
             panel.background = element_blank(),
@@ -659,7 +665,7 @@ swan_surfR <- function(path){
     pdf_name <- paste0(path, "/plots/", "swan_", ymd(pair), "_surfer.pdf")
     cat(paste0(pdf_name,"\n"))
     #add margin padding coarse but effective
-    surfers_pad <- gtable_add_padding(surfers, padding = unit(c(1,4,3,4), "cm"))
+    surfers_pad <- gtable::gtable_add_padding(surfers, padding = unit(c(1,4,3,4), "cm"))
 
     ggsave(plot = grid.draw(surfers_pad), filename = pdf_name, width=28, height=18)
 
@@ -677,7 +683,7 @@ swan_surfR <- function(path){
     pdf_nameZ <- paste0(path, "/plots/", "swan_middle_upper_", lubridate::ymd(pair), "_surfer.pdf")
     cat(paste0(pdf_nameZ,"\n"))
     #add margin padding coarse but effective
-    surfersZ_pad <- gtable_add_padding(surfersZ, padding = unit(c(1,4,3,4), "cm"))
+    surfersZ_pad <- gtable::gtable_add_padding(surfersZ, padding = unit(c(1,4,3,4), "cm"))
 
     ggsave(plot = grid.draw(surfersZ_pad), filename = pdf_nameZ, width=28, height=18)
   }
