@@ -143,16 +143,16 @@ sonde_reader <- function(path){
 #' \code{surfer_cols} takes metric designator and returns a named charcater
 #'     of colours.
 #'
-#'@param metric Character string, "sal" for Salinity, "do" for Dissolved
+#' @param metric Character string, "sal" for Salinity, "do" for Dissolved
 #'    Oxygen mg/L, "chl" for Chlorophyll a, or "temp" for Temperature.
 #'
-#'@return A named character vector where names relate to data break values and
+#' @return A named character vector where names relate to data break values and
 #'    characters are colour hex codes.
 #'
-#'@examples
+#' @examples
 #'colours <- surfer_cols(metric = "chl")
 #'
-#'@author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
+#' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
 surfer_cols <- function(metric){
   if(metric == "sal"){
     sal_brk <- as.character(seq(2, 42, 2))
@@ -193,14 +193,14 @@ surfer_cols <- function(metric){
 #' \code{just_nums} takes a numeric value and returns a character equivalent
 #'     with the correct suffix, e.g. 'th', 'nd' etc.
 #'
-#'@param n numeric value for day of month.
+#' @param n numeric value for day of month.
 #'
-#'@return A character value with correct suffix.
+#' @return A character value with correct suffix.
 #'
-#'@examples
-#'day <- just_nums(n = 2)
+#' @examples
+#'just_nums(n = 2)
 #'
-#'@author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
+#' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
 #'
 #' @importFrom dplyr case_when
 just_nums <- function(n){
