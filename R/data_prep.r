@@ -73,7 +73,7 @@ data_finder <- function(path, river){
 #' @import stringr
 #' @importFrom tidyr spread
 #' @importFrom unpivotr as_cells
-#' @importFrom testthat matches
+#' @import testthat
 
 sonde_reader <- function(path){
   # make sure of correct tab
