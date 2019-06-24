@@ -187,3 +187,28 @@ surfer_cols <- function(metric){
     return(temp_cols)
   }
 }
+
+#' Creates correct suffix for day of month
+#'
+#' \code{just_nums} takes a numeric value and returns a character equivalent
+#'     with the correct suffix, e.g. 'th', 'nd' etc.
+#'
+#'@param n numeric value for day of month.
+#'
+#'@return A character value with correct suffix.
+#'
+#'@examples
+#'day <- just_nums(n = 2)
+#'
+#'@author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
+#'
+#' @importFrom dplyr case_when
+just_nums <- function(n){
+
+  suff <- case_when(n %in% c(11,12,13) ~ "th",
+                    n %% 10 == 1 ~ 'st',
+                    n %% 10 == 2 ~ 'nd',
+                    n %% 10 == 3 ~'rd',
+                    TRUE ~ "th")
+  paste0(n, suff)
+}

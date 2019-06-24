@@ -152,6 +152,10 @@ swan_surfR <- function(path){
       dplyr::filter(site != "SRP_RSSA") %>%
       dplyr::filter(site != "BWR" & site != "KMO" & site != "VIT")
 
+    # construct pretty date
+    # sday <- just_nums(as.numeric(substr(pair, 7, 8)))
+    # sdate <- paste(sday, format(ymd(pair), "%b %Y"), sep = " ")
+
     ## Plots
     salPlot <- ggplot()+
       geom_raster(data = idw_list_a[[1]],
@@ -257,7 +261,7 @@ swan_surfR <- function(path){
                fontface =2,
                colour = "black") +
       labs(title =paste("Middle and Upper Swan River Estuary - Physical-Chemical Profile -",
-                        format(lubridate::ymd(pair), "%d %b %Y")),
+                        format(ymd(pair), "%d %b %Y")),
                         y = "") +
       theme(panel.grid.major = element_blank(),
             panel.grid.minor = element_blank(),
