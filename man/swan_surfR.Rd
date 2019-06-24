@@ -5,11 +5,17 @@
 \title{Reads in external data, combines with internal datasets and produces Swan
 River surfer plots}
 \usage{
-swan_surfR(path)
+swan_surfR(path, ovit, ocav)
 }
 \arguments{
 \item{path}{Character string filepath to location of sonde data xlsx
 workbooks.}
+
+\item{ovit}{Character string ("green", "blue" or "red") indicating
+oxygenation plant status at site VIT.}
+
+\item{ocav}{Character string ("green", "blue" or "red") indicating
+oxygenation plant status at site CAV.}
 }
 \value{
 Two pdf format four panel surfer plots of the Swan River. One shows
@@ -38,7 +44,7 @@ A river "bottom" is displayed which puts the interpolation in context.
 }
 \examples{
 \dontrun{
-swan_surfR(path = "Z:/DEC/MonitoringProgram/Data")
+swan_surfR(path = "Z:/DEC/MonitoringProgram/Data", ovit = "green", ocav = "red")
 }
 
 }
