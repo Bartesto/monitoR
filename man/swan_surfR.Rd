@@ -26,9 +26,9 @@ Two pdf format four panel surfer plots of the Swan River. One shows
 \description{
 \code{swan_surfR} takes a file path to Swan River sonde outputs and creates
     a four panel (single column) surfer plot of salinity, dissolved oxygen,
-    chlorophyll a, and temperature in pdf format. The funcion creates a
+    chlorophyll a, and temperature in pdf format. The function creates a
     folder called "plots" in the file path to store the pdf's. Code expects
-    2 excel workbooks per weekly sonde run.
+    only 2 excel workbooks for one monitoring run.
 }
 \details{
 Surfer plots display a

@@ -17,7 +17,7 @@ A character value with correct suffix.
     with the correct suffix, e.g. 'th', 'nd' etc.
 }
 \examples{
-day <- just_nums(n = 2)
+just_nums(n = 2)
 
 }
 \author{
