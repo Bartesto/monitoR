@@ -165,6 +165,10 @@ swan_surfR <- function(path, ovit, ocav){
       sday <- just_nums(as.numeric(substr(pair, 7, 8)))
       sdate <- paste(sday, format(ymd(pair), "%b %Y"), sep = " ")
 
+      # oxygenation plant status colour
+      oxy_col <- c(ovit, ocav)
+      S_oxy_locs$c <- oxy_col
+
       ## Plots
       salPlot <- ggplot()+
         geom_raster(data = idw_list_a[[1]],
@@ -331,7 +335,7 @@ swan_surfR <- function(path, ovit, ocav){
                    aes(x = x, y = y),
                    size = 6,
                    colour = "black",
-                   bg = "green",
+                   bg = S_oxy_locs$c,
                    shape = 24) +
         annotate("text",
                  label = "Dissolved Oxygen (mg/L)",
@@ -395,7 +399,7 @@ swan_surfR <- function(path, ovit, ocav){
                    aes(x = x, y = y),
                    size = 6,
                    colour = "black",
-                   bg = "green",
+                   bg = S_oxy_locs$c,
                    shape = 24) +
         annotate("text",
                  label = "Dissolved Oxygen (mg/L)",
