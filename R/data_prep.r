@@ -73,6 +73,7 @@ data_finder <- function(path, river){
 #' @import stringr
 #' @importFrom tidyr spread
 #' @importFrom unpivotr as_cells
+#' @importFrom testthat matches
 
 sonde_reader <- function(path){
   # make sure of correct tab
@@ -110,7 +111,7 @@ sonde_reader <- function(path){
 
     # return only required data for surfer
     dat4 <- dat3 %>%
-      select(matches("Site|°C|DO mg/L|SAL-ppt|DEP m|Chl ug/L"))
+      dplyr::select(testthat::matches("Site|°C|DO mg/L|SAL-ppt|DEP m|Chl ug/L"))
 
     return(dat4)
 
@@ -131,7 +132,7 @@ sonde_reader <- function(path){
 
     # return only required data for surfer
     dat4 <- dat %>%
-      dplyr::select(matches("Site|°C|DO mg/L|SAL-ppt|DEP m|Chl ug/L"))
+      dplyr::select(testthat::matches("Site|°C|DO mg/L|SAL-ppt|DEP m|Chl ug/L"))
 
     return(dat4)
   }
