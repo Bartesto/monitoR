@@ -178,7 +178,7 @@ swan_surfR <- function(path, ovit, ocav){
                            breaks = seq(0, 50, by = 5)) +
         scale_y_continuous(expand = expand_scale(mult = c(0, .05))) +
         stat_contour2(data = idw_list_a[[1]], aes(x=x, y=y, z = Salinity),
-                      colour = "grey70",
+                      colour = "grey10",
                       breaks = MakeBreaks(binwidth = 2)) +
         scale_fill_manual(values = surfer_cols("sal"),
                           guide = guide_legend(reverse=T),
