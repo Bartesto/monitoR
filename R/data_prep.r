@@ -110,7 +110,7 @@ sonde_reader <- function(path){
 
     # return only required data for surfer
     dat4 <- dat3 %>%
-      dplyr::select(matches("Site|°C|DO mg/L|SAL-ppt|DEP m|Chl ug/L"))
+      dplyr::select(Site, '°C', 'DO mg/L', 'SAL-ppt', 'DEP m', 'Chl ug/L')
 
     return(dat4)
 
@@ -131,7 +131,7 @@ sonde_reader <- function(path){
 
     # return only required data for surfer
     dat4 <- dat %>%
-      dplyr::select(matches("Site|°C|DO mg/L|SAL-ppt|DEP m|Chl ug/L"))
+      dplyr::select(Site, '°C', 'DO mg/L', 'SAL-ppt', 'DEP m', 'Chl ug/L')
 
     return(dat4)
   }
