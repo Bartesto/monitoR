@@ -172,7 +172,7 @@ swan_surfR <- function(path, ovit, ocav){
       # create mock plot to harvest legend for oxy locs status
       triangle_df <- data.frame(x = c(1, 2, 3), y = 2, stat = c("a", "b", "c"))
       o_plot<- ggplot(triangle_df) +
-        geom_point(aes(x = x, y = y, bg = stat), shape = 24, colour = "black") +
+        geom_point(aes(x = x, y = y, fill = stat), shape = 24, colour = "black") +
         scale_fill_manual(name = "Oxygen Plant Operational Status",
                           values = c("green", "blue", "red"),
                           labels = c("Operable and operating for part or all of the 24 hours\nprior to sampling",
@@ -182,7 +182,8 @@ swan_surfR <- function(path, ovit, ocav){
         theme(legend.key.size = unit(8, "mm"),
               legend.background = element_blank(),
               legend.box.background = element_rect(colour = "black", fill = "white"),
-              legend.title = element_text(face="bold"))
+              legend.title = element_text(face="bold")) +
+        guides(fill = guide_legend(override.aes = list(size=5)))
       oxY_grob <- gtable_filter(ggplot_gtable(ggplot_build(o_plot)), "guide-box")
 
       ## Plots
