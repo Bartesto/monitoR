@@ -361,7 +361,6 @@ swan_surfR <- function(path, ovit, ocav){
                  size = 9,
                  fontface = 2,
                  colour = "black") +
-
         annotation_custom(grob = oxY_grob, xmin = 40, xmax = 47, ymin = -20, ymax = -12) +
         labs(y = "Depth (m)") +
         theme(panel.grid.major = element_blank(),
