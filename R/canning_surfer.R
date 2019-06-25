@@ -205,7 +205,8 @@ canning_surfR <- function(path, obac, onic){
         theme(legend.key.size = unit(8, "mm"),
               legend.background = element_blank(),
               legend.box.background = element_rect(colour = "black", fill = "white"),
-              legend.title = element_text(face="bold"))
+              legend.title = element_text(face="bold")) +
+        guides(fill = guide_legend(override.aes = list(size=5)))
       oxY_grob <- gtable_filter(ggplot_gtable(ggplot_build(o_plot)), "guide-box")
 
 
