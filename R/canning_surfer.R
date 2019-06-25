@@ -184,6 +184,31 @@ canning_surfR <- function(path, obac, onic){
         interp <- idw_list_all
       }
 
+      # construct pretty date
+      sday <- just_nums(as.numeric(substr(pair, 7, 8)))
+      sdate <- paste(sday, format(ymd(pair), "%b %Y"), sep = " ")
+
+      # oxy cols
+      oxy_col <- c(obac, onic)
+      C_oxy_locs$c <- oxy_col
+
+      ##NEW STUFF
+      triangle_df <- data.frame(x = c(1, 2, 3), y = 2, stat = c("a", "b", "c"))
+      o_plot<- ggplot(triangle_df) +
+        geom_point(aes(x = x, y = y, bg = stat), shape = 24, colour = "black") +
+        scale_fill_manual(name = "Oxygen Plant Operational Status",
+                          values = c("green", "blue", "red"),
+                          labels = c("Operable and operating for part or all of the 24 hours\nprior to sampling",
+                                     "Operable but not triggered to operate in the 24 hours\nprior to sampling",
+                                     "Inoperable for part or all of the 24 hours prior to sampling")) +
+        theme_bw() +
+        theme(legend.key.size = unit(8, "mm"),
+              legend.background = element_blank(),
+              legend.box.background = element_rect(colour = "black", fill = "white"),
+              legend.title = element_text(face="bold"))
+      oxY_grob <- gtable_filter(ggplot_gtable(ggplot_build(o_plot)), "guide-box")
+
+
       salPlot <- ggplot()+
         geom_raster(data = interp[[1]],
                     aes(x=x, y=y, fill = factor(Salinity))) +
