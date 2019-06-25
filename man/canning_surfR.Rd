@@ -5,11 +5,17 @@
 \title{Reads in external data, combines with internal datasets and produces Canning
 River surfer plots}
 \usage{
-canning_surfR(path)
+canning_surfR(path, obac, onic)
 }
 \arguments{
 \item{path}{Character string filepath to location of sonde data xlsx
 workbooks.}
+
+\item{obac}{Character string ("green", "blue" or "red") indicating
+oxygenation plant status at site BAC.}
+
+\item{onic}{Character string ("green", "blue" or "red") indicating
+oxygenation plant status at site NIC.}
 }
 \value{
 A pdf format four panel surfer plot of the Canning River.
@@ -17,7 +23,9 @@ A pdf format four panel surfer plot of the Canning River.
 \description{
 \code{canning_surfR} takes a file path to Canning River sonde output and creates
     a four panel (single column) surfer plot of salinity, dissolved oxygen,
-    chlorophyll a, and temperature in pdf format.
+    chlorophyll a, and temperature in pdf format. The function creates a
+    folder called "plots" in the file path to store the pdf's. Code expects
+    only 2 excel workbooks for one monitoring run.
 }
 \details{
 Surfer plots display a
@@ -33,7 +41,7 @@ A river "bottom" is displayed which puts the interpolation in context.
 }
 \examples{
 \dontrun{
-canning_surfR(path = "Z:/DEC/MonitoringProgram/Data")
+canning_surfR(path = "Z:/DEC/MonitoringProgram/Data", obac = "green", onic = "red")
 }
 
 }
