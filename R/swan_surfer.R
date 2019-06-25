@@ -169,6 +169,22 @@ swan_surfR <- function(path, ovit, ocav){
       oxy_col <- c(ovit, ocav)
       S_oxy_locs$c <- oxy_col
 
+      # create mock plot to harvest legend for oxy locs status
+      triangle_df <- data.frame(x = c(1, 2, 3), y = 2, stat = c("a", "b", "c"))
+      o_plot<- ggplot(triangle_df) +
+        geom_point(aes(x = x, y = y, bg = stat), shape = 24, colour = "black") +
+        scale_fill_manual(name = "Oxygen Plant Operational Status",
+                          values = c("green", "blue", "red"),
+                          labels = c("Operable and operating for part or all of the 24 hours\nprior to sampling",
+                                     "Operable but not triggered to operate in the 24 hours\nprior to sampling",
+                                     "Inoperable for part or all of the 24 hours prior to sampling")) +
+        theme_bw() +
+        theme(legend.key.size = unit(8, "mm"),
+              legend.background = element_blank(),
+              legend.box.background = element_rect(colour = "black", fill = "white"),
+              legend.title = element_text(face="bold"))
+      oxY_grob <- gtable_filter(ggplot_gtable(ggplot_build(o_plot)), "guide-box")
+
       ## Plots
       salPlot <- ggplot()+
         geom_raster(data = idw_list_a[[1]],
@@ -227,14 +243,15 @@ swan_surfR <- function(path, ovit, ocav){
               axis.title.x = element_blank(),
               plot.title = element_text(hjust=0.5, vjust=0.5, face='bold', size = 28),
               plot.subtitle = element_text(hjust=0.5, vjust=0.5, size = 22),
-              legend.background = element_rect(fill = "lightgray"),
+              legend.background = element_rect(fill = "transparent"),
               legend.direction = "horizontal",
               legend.position = c(0.65, 0.22),
               legend.key.size =  unit(8, "mm"),
               legend.title = element_blank(),
               legend.text = element_text(size = 12),
               plot.margin=grid::unit(c(0,0,0,0), "mm")) +
-        guides(fill = guide_legend(nrow = 2, byrow = TRUE))
+        guides(fill = guide_legend(nrow = 1, byrow = TRUE,
+                                   label.position = "bottom"))
 
       salPlotZ <- ggplot()+
         geom_raster(data = idw_list_n[[1]],
@@ -294,13 +311,14 @@ swan_surfR <- function(path, ovit, ocav){
               axis.title.x = element_blank(),
               plot.title = element_text(hjust=0.5, vjust=0.5, face='bold', size = 28),
               plot.subtitle = element_text(hjust=0.5, vjust=0.5, size = 22),
-              legend.background = element_rect(fill = "lightgray"),
+              legend.background = element_rect(fill = "transparent"),
               legend.direction = "horizontal",
-              legend.position = c(0.70, 0.22),
+              legend.position = c(0.65, 0.22),
               legend.key.size =  unit(8, "mm"),
               legend.text = element_text(size = 12),
               plot.margin=grid::unit(c(0,0,0,0), "mm")) +
-        guides(fill = guide_legend(nrow = 2, byrow = TRUE))
+        guides(fill = guide_legend(nrow = 1, byrow = TRUE,
+                                   label.position = "bottom"))
 
       doPlot <- ggplot()+
         geom_raster(data = idw_list_a[[2]],
@@ -342,6 +360,8 @@ swan_surfR <- function(path, ovit, ocav){
                  size = 9,
                  fontface = 2,
                  colour = "black") +
+
+        annotation_custom(grob = oxY_grob, xmin = 40, xmax = 47, ymin = -20, ymax = -12) +
         labs(y = "Depth (m)") +
         theme(panel.grid.major = element_blank(),
               panel.grid.minor = element_blank(),
@@ -359,14 +379,15 @@ swan_surfR <- function(path, ovit, ocav){
               axis.title.x = element_blank(),
               plot.title = element_text(hjust=0.5, vjust=0.5, face='bold'),
               plot.subtitle = element_text(hjust=0.5, vjust=0.5),
-              legend.background = element_rect(fill = "lightgray"),
+              legend.background = element_rect(fill = "transparent"),
               legend.direction = "horizontal",
               legend.position = c(0.65, 0.22),
               legend.key.size =  unit(8, "mm"),
               legend.title = element_blank(),
               legend.text = element_text(size = 12),
               plot.margin=grid::unit(c(0,0,0,0), "mm")) +
-        guides(fill = guide_legend(nrow = 2, byrow = TRUE))
+        guides(fill = guide_legend(nrow = 1, byrow = TRUE,
+                                   label.position = "bottom"))
 
       doPlotZ <- ggplot()+
         geom_raster(data = idw_list_n[[2]],
@@ -396,7 +417,7 @@ swan_surfR <- function(path, ovit, ocav){
                    colour = "black",
                    size = 0.5) +
         geom_point(data = S_oxy_locs,
-                   aes(x = x, y = y),
+                   aes(x = x, y = y + 1),#nudge up
                    size = 6,
                    colour = "black",
                    bg = S_oxy_locs$c,
@@ -408,6 +429,8 @@ swan_surfR <- function(path, ovit, ocav){
                  size = 9,
                  fontface = 2,
                  colour = "black") +
+
+        annotation_custom(grob = oxY_grob, xmin = 44, xmax = 50, ymin = -9, ymax = -6.8) +
         labs(y = "Depth (m)") +
         theme(panel.grid.major = element_blank(),
               panel.grid.minor = element_blank(),
@@ -425,14 +448,15 @@ swan_surfR <- function(path, ovit, ocav){
               axis.title.x = element_blank(),
               plot.title = element_text(hjust=0.5, vjust=0.5, face='bold'),
               plot.subtitle = element_text(hjust=0.5, vjust=0.5),
-              legend.background = element_rect(fill = "lightgray"),
+              legend.background = element_rect(fill = "transparent"),
               legend.direction = "horizontal",
               legend.position = c(0.65, 0.22),
               legend.key.size =  unit(8, "mm"),
               legend.title = element_blank(),
               legend.text = element_text(size = 12),
               plot.margin=grid::unit(c(0,0,0,0), "mm")) +
-        guides(fill = guide_legend(nrow = 2, byrow = TRUE))
+        guides(fill = guide_legend(nrow = 1, byrow = TRUE,
+                                   label.position = "bottom"))
 
 
       chlorPlot <- ggplot()+
@@ -490,14 +514,15 @@ swan_surfR <- function(path, ovit, ocav){
               axis.title.x = element_blank(),
               plot.title = element_text(hjust=0.5, vjust=0.5, face='bold', size = 24),
               plot.subtitle = element_text(hjust=0.5, vjust=0.5, size = 22),
-              legend.background = element_rect(fill = "lightgray"),
+              legend.background = element_rect(fill = "transparent"),
               legend.direction = "horizontal",
               legend.position = c(0.65, 0.22),
               legend.key.size =  unit(8, "mm"),
               legend.title = element_blank(),
               legend.text = element_text(size = 12),
               plot.margin=grid::unit(c(0,0,0,0), "mm")) +
-        guides(fill = guide_legend(nrow = 2, byrow = TRUE))
+        guides(fill = guide_legend(nrow = 1, byrow = TRUE,
+                                   label.position = "bottom"))
 
       chlorPlotZ <- ggplot()+
         geom_raster(data = idw_list_n[[4]],
@@ -554,14 +579,15 @@ swan_surfR <- function(path, ovit, ocav){
               axis.title.x = element_blank(),
               plot.title = element_text(hjust=0.5, vjust=0.5, face='bold', size = 24),
               plot.subtitle = element_text(hjust=0.5, vjust=0.5, size = 22),
-              legend.background = element_rect(fill = "lightgray"),
+              legend.background = element_rect(fill = "transparent"),
               legend.direction = "horizontal",
               legend.position = c(0.65, 0.22),
               legend.key.size =  unit(8, "mm"),
               legend.title = element_blank(),
               legend.text = element_text(size = 12),
               plot.margin=grid::unit(c(0,0,0,0), "mm")) +
-        guides(fill = guide_legend(nrow = 2, byrow = TRUE))
+        guides(fill = guide_legend(nrow = 1, byrow = TRUE,
+                                   label.position = "bottom"))
 
       tempPlot <- ggplot()+
         geom_raster(data = idw_list_a[[3]],
@@ -610,14 +636,15 @@ swan_surfR <- function(path, ovit, ocav){
               axis.text = element_text(size = 18),
               plot.title = element_text(hjust=0.5, vjust=0.5, face='bold', size = 24),
               plot.subtitle = element_text(hjust=0.5, vjust=0.5, size = 22),
-              legend.background = element_rect(fill = "lightgray"),
+              legend.background = element_rect(fill = "transparent"),
               legend.direction = "horizontal",
               legend.position = c(0.65, 0.22),
               legend.key.size =  unit(8, "mm"),
               legend.title = element_blank(),
               legend.text = element_text(size = 12),
               plot.margin=grid::unit(c(0,0,0,0), "mm")) +
-        guides(fill = guide_legend(nrow = 2, byrow = TRUE))
+        guides(fill = guide_legend(nrow = 1, byrow = TRUE,
+                                   label.position = "bottom"))
 
       tempPlotZ <- ggplot()+
         geom_raster(data = idw_list_n[[3]],
@@ -666,14 +693,15 @@ swan_surfR <- function(path, ovit, ocav){
               axis.text = element_text(size = 18),
               plot.title = element_text(hjust=0.5, vjust=0.5, face='bold', size = 24),
               plot.subtitle = element_text(hjust=0.5, vjust=0.5, size = 22),
-              legend.background = element_rect(fill = "lightgray"),
+              legend.background = element_rect(fill = "transparent"),
               legend.direction = "horizontal",
               legend.position = c(0.65, 0.22),
               legend.key.size =  unit(8, "mm"),
               legend.title = element_blank(),
               legend.text = element_text(size = 12),
               plot.margin=grid::unit(c(0,0,0,0), "mm")) +
-        guides(fill = guide_legend(nrow = 2, byrow = TRUE))
+        guides(fill = guide_legend(nrow = 1, byrow = TRUE,
+                                   label.position = "bottom"))
 
       # full length plots
       #create list of plotGrobs
