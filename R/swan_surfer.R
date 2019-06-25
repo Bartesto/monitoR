@@ -246,7 +246,7 @@ swan_surfR <- function(path, ovit, ocav){
         scale_y_continuous(expand = expand_scale(mult = c(0, .05))) +
         stat_contour2(data = idw_list_n[[1]],
                       aes(x=x, y=y, z = Salinity),
-                      colour = "grey50",
+                      colour = "grey10",
                       breaks = MakeBreaks(binwidth = 2)) +
         scale_fill_manual(values = surfer_cols("sal"),
                           guide = guide_legend(reverse=T),
@@ -313,7 +313,7 @@ swan_surfR <- function(path, ovit, ocav){
         scale_y_continuous(expand = expand_scale(mult = c(0, .05))) +
         stat_contour2(data = idw_list_a[[2]],
                       aes(x=x, y=y, z = Dissolved_Oxygen),
-                      colour = "grey50",
+                      colour = "grey10",
                       breaks = MakeBreaks(binwidth = 1)) +
         scale_fill_manual(values = surfer_cols("do"),
                           guide = guide_legend(reverse=T),
@@ -377,7 +377,7 @@ swan_surfR <- function(path, ovit, ocav){
         scale_y_continuous(expand = expand_scale(mult = c(0, .05))) +
         stat_contour2(data = idw_list_n[[2]],
                       aes(x=x, y=y, z = Dissolved_Oxygen),
-                      colour = "grey50",
+                      colour = "grey10",
                       breaks = MakeBreaks(binwidth = 1)) +
         scale_fill_manual(values = surfer_cols("do"),
                           guide = guide_legend(reverse=T),
@@ -443,7 +443,7 @@ swan_surfR <- function(path, ovit, ocav){
         scale_y_continuous(expand = expand_scale(mult = c(0, .05))) +
         stat_contour2(data = idw_list_a[[4]],
                       aes(x=x, y=y, z = Chlorophyll),
-                      colour = "grey50",
+                      colour = "grey10",
                       breaks = as.numeric(chl_brk)) +
         scale_fill_manual(values = surfer_cols("chl"),
                           guide = guide_legend(reverse=T),
@@ -505,7 +505,7 @@ swan_surfR <- function(path, ovit, ocav){
         scale_y_continuous(expand = expand_scale(mult = c(0, .05)))+
         stat_contour2(data = idw_list_n[[4]],
                       aes(x=x, y=y, z = Chlorophyll),
-                      colour = "grey50",
+                      colour = "grey10",
                       breaks = chl_brk) +
         scale_fill_manual(values = surfer_cols("chl"),
                           guide = guide_legend(reverse=T),
@@ -566,7 +566,7 @@ swan_surfR <- function(path, ovit, ocav){
         scale_y_continuous(expand = expand_scale(mult = c(0, .05))) +
         stat_contour2(data = idw_list_a[[3]],
                       aes(x=x, y=y, z = Temperature),
-                      colour = "grey50",
+                      colour = "grey10",
                       breaks = MakeBreaks(binwidth = 1)) +
         scale_fill_manual(values = surfer_cols("temp"),
                           guide = guide_legend(reverse=T),
@@ -619,7 +619,7 @@ swan_surfR <- function(path, ovit, ocav){
         scale_y_continuous(expand = expand_scale(mult = c(0, .05)))+
         stat_contour2(data = idw_list_n[[3]],
                       aes(x=x, y=y, z = Temperature),
-                      colour = "grey50",
+                      colour = "grey10",
                       breaks = MakeBreaks(binwidth = 1)) +
         scale_fill_manual(values = surfer_cols("temp"),
                           guide = guide_legend(reverse=T),
