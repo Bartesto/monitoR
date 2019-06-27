@@ -143,7 +143,9 @@ reclass_mT <- matrix(reclass_dfT,
 # chlorophyll
 aC <- seq(20, 80, 20)
 bC <- rep(aC, each = 3)
-reclass_dfC <- c(0, bC, 120, 120, 120, 200, 200, 200, 400, 400, 400, 1000, 1000)
+#reclass_dfC <- c(0, bC, 120, 120, 120, 200, 200, 200, 400, 400, 400, 1000, 1000)
+reclass_dfC <- c(0, bC, 120, 120, 120, 160, 160, 160, 200, 200, 200,
+                 300, 300, 300, 400, 400, 400, 1000, 1000)
 reclass_mChl <- matrix(reclass_dfC,
                        ncol = 3,
                        byrow = TRUE)

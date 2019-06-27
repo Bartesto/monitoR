@@ -171,9 +171,11 @@ surfer_cols <- function(metric){
     names(do_mg_l_cols) <- do_mg_l_brk
     return(do_mg_l_cols)
   } else if(metric == "chl"){
-    chl_brk <- c(as.character(seq(20, 80, 20)), "120", "200",  "400", "1000")
-    chlr_cols <- c("white","#d6f5d6","#99e699", "#47d147", "#248f24", "#145214",
-                   "#990000", "#ff0000")
+    chl_brk <- c(as.character(seq(20, 80, 20)), "120", "160", "200", "300", "400", "1000")
+    # chlr_cols <- c("white","#d6f5d6","#99e699", "#47d147", "#248f24", "#145214",
+    #                "#990000", "#ff0000")
+    chlr_cols <- c("#ffffff","#f5fcf5","#ccf2cc", "#a3e8a3", "#7ade7a", "#52d452",
+                   "#2eb82e", "#990000", "#cc0000", "#ff0000")
     names(chlr_cols) <- chl_brk
     return(chlr_cols)
   } else {
