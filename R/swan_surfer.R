@@ -293,7 +293,7 @@ swan_surfR <- function(path, ovit, ocav){
                  size = 9,
                  fontface =2,
                  colour = "black") +
-        labs(title = paste("Swan River Estuary - Physical-Chemical Profile -",
+        labs(title = paste("Middle and Upper Swan River Estuary - Physical-Chemical Profile -",
                            sdate),
              y = "") +
         theme(panel.grid.major = element_blank(),
