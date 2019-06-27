@@ -143,7 +143,7 @@ reclass_mT <- matrix(reclass_dfT,
 # chlorophyll
 aC <- seq(20, 80, 20)
 bC <- rep(aC, each = 3)
-reclass_dfC <- c(0, bC, 120, 120, 120, 200, 200, 200, 1000, 1000)
+reclass_dfC <- c(0, bC, 120, 120, 120, 200, 200, 200, 400, 400, 400, 1000, 1000)
 reclass_mChl <- matrix(reclass_dfC,
                        ncol = 3,
                        byrow = TRUE)
@@ -267,7 +267,7 @@ all_y_range <- as.numeric(c(-7, 0))  #
 # create an empty grid for lower canning
 grd1 <- expand.grid(x = seq(from = lc_x_range[1],
                             to = lc_x_range[2],
-                            by = 0.02),
+                            by = 0.1),
                     y = seq(from = lc_y_range[1],
                             to = lc_y_range[2],
                             by = 0.1))  # expand points to grid
@@ -275,7 +275,7 @@ grd1 <- expand.grid(x = seq(from = lc_x_range[1],
 # create an empty grid for upper canning
 grd2 <- expand.grid(x = seq(from = uc_x_range[1],
                             to = uc_x_range[2],
-                            by = 0.02),
+                            by = 0.1),
                     y = seq(from = uc_y_range[1],
                             to = uc_y_range[2],
                             by = 0.1))  # expand points to grid
@@ -284,7 +284,7 @@ grd2 <- expand.grid(x = seq(from = uc_x_range[1],
 # create an empty grid for whole of river
 grd3 <- expand.grid(x = seq(from = all_x_range[1],
                             to = all_x_range[2],
-                            by = 0.02),
+                            by = 0.1),
                     y = seq(from = all_y_range[1],
                             to = all_y_range[2],
                             by = 0.1))  # expand points to grid
