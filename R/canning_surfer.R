@@ -54,6 +54,7 @@
 #'
 #' @export
 canning_surfR <- function(path, obac, onic){
+  suppressWarnings({
   locations <- data_finder(path, river = "c")
 
   #error handler
@@ -475,5 +476,6 @@ canning_surfR <- function(path, obac, onic){
   } else {
     stop("Function expecting only 2 excel workbooks for one monitoring period")
   }
+  })
 
 }
