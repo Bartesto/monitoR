@@ -473,8 +473,8 @@ swan_surfR <- function(path, ovit, ocav){
         scale_fill_manual(values = surfer_cols("chl"),
                           guide = guide_legend(reverse=T),
                           name = "Chlorophyll\n(ug/L)",
-                          labels = c("20", "40", "60", "80", "120", "200",
-                                     "400", "> 400")) +
+                          labels = c("20", "40", "60", "80", "120", "160",
+                                     "200", "300", "400", "> 400")) +
         geom_polygon(data = S_bottom,
                      aes(x=x, y=y), fill = "grey90", colour = "grey20") +
         geom_text_contour(data = idw_list_a[[4]],
@@ -538,8 +538,8 @@ swan_surfR <- function(path, ovit, ocav){
         scale_fill_manual(values = surfer_cols("chl"),
                           guide = guide_legend(reverse=T),
                           name = "Chlorophyll\n(ug/L)",
-                          labels = c("20", "40", "60", "80", "120", "200",
-                                     "400", "> 400")) +
+                          labels = c("20", "40", "60", "80", "120", "160",
+                                     "200", "300", "400", "> 400")) +
         geom_polygon(data = S_bottom_nar,
                      aes(x=x, y=y), fill = "grey90", colour = "grey20") +
         geom_text_contour(data = idw_list_n[[4]],

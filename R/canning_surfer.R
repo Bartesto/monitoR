@@ -357,8 +357,8 @@ canning_surfR <- function(path, obac, onic){
         scale_fill_manual(values = surfer_cols("chl"),
                           guide = guide_legend(reverse=T),
                           name = "Chlorophyll\n(ug/L)",
-                          labels = c("20", "40", "60", "80", "120", "200",
-                                     "> 200")) +
+                          labels = c("20", "40", "60", "80", "120", "160",
+                                     "200", "300", "400", "> 400")) +
         geom_text_contour(data = interp[[4]],
                           aes(x=x, y=y, z = Chlorophyll),
                           skip = 2,
