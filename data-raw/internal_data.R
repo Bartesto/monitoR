@@ -267,7 +267,7 @@ all_y_range <- as.numeric(c(-7, 0))  #
 # create an empty grid for lower canning
 grd1 <- expand.grid(x = seq(from = lc_x_range[1],
                             to = lc_x_range[2],
-                            by = 0.1),
+                            by = 0.02),
                     y = seq(from = lc_y_range[1],
                             to = lc_y_range[2],
                             by = 0.1))  # expand points to grid
@@ -275,7 +275,7 @@ grd1 <- expand.grid(x = seq(from = lc_x_range[1],
 # create an empty grid for upper canning
 grd2 <- expand.grid(x = seq(from = uc_x_range[1],
                             to = uc_x_range[2],
-                            by = 0.1),
+                            by = 0.02),
                     y = seq(from = uc_y_range[1],
                             to = uc_y_range[2],
                             by = 0.1))  # expand points to grid
@@ -284,7 +284,7 @@ grd2 <- expand.grid(x = seq(from = uc_x_range[1],
 # create an empty grid for whole of river
 grd3 <- expand.grid(x = seq(from = all_x_range[1],
                             to = all_x_range[2],
-                            by = 0.1),
+                            by = 0.02),
                     y = seq(from = all_y_range[1],
                             to = all_y_range[2],
                             by = 0.1))  # expand points to grid
