@@ -206,7 +206,7 @@ swan_surfR <- function(path, ovit, ocav){
                           aes(x=x, y=y, z = Salinity),
                           check_overlap = TRUE,
                           size = 6,
-                          stroke = 0.2,
+                          #stroke = 0.2,
                           breaks = MakeBreaks(binwidth = 2)) +
         geom_point(data = samp_locs,
                    aes(x = x, y = - y),
@@ -220,8 +220,8 @@ swan_surfR <- function(path, ovit, ocav){
                   check_overlap = TRUE) +
         annotate("text",
                  label = "Salinity (ppt)",
-                 x = 21,
-                 y = -17.8,
+                 x = 19,
+                 y = -16.5,
                  size = 9,
                  fontface =2,
                  colour = "black") +
@@ -257,24 +257,25 @@ swan_surfR <- function(path, ovit, ocav){
       salPlotZ <- ggplot()+
         geom_raster(data = idw_list_n[[1]],
                     aes(x=x, y=y, fill = factor(Salinity))) +
-        scale_x_continuous(limits = c(20.85,51.6),
+        scale_x_continuous(limits = c(20.95,51.6),
                            expand = c(0, 0),
                            breaks = c(25, 30, 35, 40, 45, 50)) +
-        scale_y_continuous(expand = expand_scale(mult = c(0, .05))) +
+        scale_y_continuous(breaks = c(-8, -6, -4, -2, 0),
+                           expand = expand_scale(mult = c(0, .05)))+
         stat_contour2(data = idw_list_n[[1]],
                       aes(x=x, y=y, z = Salinity),
                       colour = "grey10",
                       breaks = MakeBreaks(binwidth = 2)) +
         scale_fill_manual(values = surfer_cols("sal"),
                           guide = guide_legend(reverse=T),
-                          name = "Salinity\n(ppt)") +
+                          name = "") +
         geom_polygon(data = S_bottom_nar,
                      aes(x=x, y=y), fill = "grey90", colour = "grey20") +
         geom_text_contour(data = idw_list_n[[1]],
                           aes(x=x, y=y, z = Salinity),
                           check_overlap = TRUE,
                           size = 6,
-                          stroke = 0.2,
+                          #stroke = 0.2,
                           breaks = MakeBreaks(binwidth = 2)) +
         geom_point(data = filter(samp_locs, x >= 21),
                    aes(x = x, y = - y),
@@ -288,8 +289,8 @@ swan_surfR <- function(path, ovit, ocav){
                   check_overlap = TRUE) +
         annotate("text",
                  label = "Salinity (ppt)",
-                 x = 34,
-                 y = -8,
+                 x = 32.8,
+                 y = -7.4,
                  size = 9,
                  fontface =2,
                  colour = "black") +
@@ -314,6 +315,7 @@ swan_surfR <- function(path, ovit, ocav){
               plot.subtitle = element_text(hjust=0.5, vjust=0.5, size = 22),
               legend.background = element_rect(fill = "transparent"),
               legend.direction = "horizontal",
+              legend.title = element_blank(),
               legend.position = c(0.65, 0.22),
               legend.key.size =  unit(8, "mm"),
               legend.text = element_text(size = 12),
@@ -334,7 +336,7 @@ swan_surfR <- function(path, ovit, ocav){
                       breaks = MakeBreaks(binwidth = 1)) +
         scale_fill_manual(values = surfer_cols("do"),
                           guide = guide_legend(reverse=T),
-                          name = "Dissolved\nOxygen\n(mg/L)") +
+                          name = "") +
         geom_polygon(data = S_bottom,
                      aes(x=x, y=y), fill = "grey90", colour = "grey20") +
         geom_text_contour(data = idw_list_a[[2]],
@@ -342,7 +344,7 @@ swan_surfR <- function(path, ovit, ocav){
                           skip = 1,
                           check_overlap = TRUE,
                           size = 6,
-                          stroke = 0.2,
+                          #stroke = 0.2,
                           breaks = MakeBreaks(binwidth = 1)) +
         geom_point(data = samp_locs,
                    aes(x = x, y = - y),
@@ -357,7 +359,7 @@ swan_surfR <- function(path, ovit, ocav){
         annotate("text",
                  label = "Dissolved Oxygen (mg/L)",
                  x = 21,
-                 y = -18,
+                 y = -16.7,
                  size = 9,
                  fontface = 2,
                  colour = "black") +
@@ -392,17 +394,18 @@ swan_surfR <- function(path, ovit, ocav){
       doPlotZ <- ggplot()+
         geom_raster(data = idw_list_n[[2]],
                     aes(x=x, y=y, fill = factor(Dissolved_Oxygen))) +
-        scale_x_continuous(limits = c(20.85,51.6),
+        scale_x_continuous(limits = c(20.95,51.6),
                            expand = c(0, 0),
                            breaks = c(25, 30, 35, 40, 45, 50)) +
-        scale_y_continuous(expand = expand_scale(mult = c(0, .05))) +
+        scale_y_continuous(breaks = c(-8, -6, -4, -2, 0),
+                           expand = expand_scale(mult = c(0, .05)))+
         stat_contour2(data = idw_list_n[[2]],
                       aes(x=x, y=y, z = Dissolved_Oxygen),
                       colour = "grey10",
                       breaks = MakeBreaks(binwidth = 1)) +
         scale_fill_manual(values = surfer_cols("do"),
                           guide = guide_legend(reverse=T),
-                          name = "Dissolved\nOxygen\n(mg/L)") +
+                          name = "") +
         geom_polygon(data = S_bottom_nar,
                      aes(x=x, y=y), fill = "grey90", colour = "grey20") +
         geom_text_contour(data = idw_list_n[[2]],
@@ -410,7 +413,7 @@ swan_surfR <- function(path, ovit, ocav){
                           skip = 1,
                           check_overlap = TRUE,
                           size = 6,
-                          stroke = 0.2,
+                          #stroke = 0.2,
                           breaks = MakeBreaks(binwidth = 1)) +
         geom_point(data = filter(samp_locs, x >= 21),
                    aes(x = x, y = - y),
@@ -425,7 +428,7 @@ swan_surfR <- function(path, ovit, ocav){
         annotate("text",
                  label = "Dissolved Oxygen (mg/L)",
                  x = 34,
-                 y = -8,
+                 y = -7.57,
                  size = 9,
                  fontface = 2,
                  colour = "black") +
@@ -465,7 +468,9 @@ swan_surfR <- function(path, ovit, ocav){
         scale_x_continuous(limits = c(-1, 51.6),
                            expand = c(0, 0),
                            breaks = seq(0, 50, by = 5)) +
-        scale_y_continuous(expand = expand_scale(mult = c(0, .05))) +
+        scale_y_continuous(limits = c(-22.1, 0),
+                           expand = c(0, 0)) +
+        #scale_y_continuous(expand = expand_scale(mult = c(0, .05))) +
         stat_contour2(data = idw_list_a[[4]],
                       aes(x=x, y=y, z = Chlorophyll),
                       colour = "grey10",
@@ -482,16 +487,16 @@ swan_surfR <- function(path, ovit, ocav){
                           skip = 3,
                           check_overlap = TRUE,
                           size = 6,
-                          stroke = 0.2,
-                          breaks = MakeBreaks(binwidth = 20)) +
+                          #stroke = 0.2,
+                          breaks = as.numeric(chl_brk)) +
         geom_point(data = samp_locs,
                    aes(x = x, y = - y),
                    colour = "black",
                    size = 0.5) +
         annotate("text",
-                 label = expression('bold(paste("Chlorophyll (", mu,"/L)"))'),
-                 x = 21,
-                 y = -18,
+                 label = expression('bold(paste("F - Chlorophyll (", mu,"g/L)"))'),
+                 x = 20.4,
+                 y = -16.8,
                  size = 9,
                  fontface =2,
                  colour = "black", parse = TRUE) +
@@ -500,7 +505,8 @@ swan_surfR <- function(path, ovit, ocav){
         theme(panel.grid.major = element_blank(),
               panel.grid.minor = element_blank(),
               panel.background = element_blank(),
-              panel.border = element_blank(),
+              #panel.border = element_blank(),
+              panel.border = element_rect(fill = NA, colour = "#CCCCCC"),
               axis.line = element_line(colour = "black"),
               axis.line.x = element_blank(),
               axis.line.y = element_blank(),
@@ -527,14 +533,16 @@ swan_surfR <- function(path, ovit, ocav){
         geom_raster(data = idw_list_n[[4]],
                     aes(x=x, y=y, fill = factor(Chlorophyll)),
                     alpha = 0.5) +
-        scale_x_continuous(limits = c(20.85,51.6),
+        scale_x_continuous(limits = c(20.95,51.6),
                            expand = c(0, 0),
                            breaks = c(25, 30, 35, 40, 45, 50)) +
-        scale_y_continuous(expand = expand_scale(mult = c(0, .05)))+
+        scale_y_continuous(breaks = c(-8, -6, -4, -2, 0),
+                           expand = c(0, 0)) +
+        #expand = expand_scale(mult = c(0, .05)))+
         stat_contour2(data = idw_list_n[[4]],
                       aes(x=x, y=y, z = Chlorophyll),
                       colour = "grey10",
-                      breaks = chl_brk) +
+                      breaks = as.numeric(chl_brk)) +
         scale_fill_manual(values = surfer_cols("chl"),
                           guide = guide_legend(reverse=T),
                           name = "Chlorophyll\n(ug/L)",
@@ -547,16 +555,16 @@ swan_surfR <- function(path, ovit, ocav){
                           skip = 3,
                           check_overlap = TRUE,
                           size = 6,
-                          stroke = 0.2,
+                          #stroke = 0.2,
                           breaks = as.numeric(chl_brk)) +
         geom_point(data = filter(samp_locs, x >= 21),
                    aes(x = x, y = - y),
                    colour = "black",
                    size = 0.5) +
         annotate("text",
-                 label = expression('bold(paste("Chlorophyll (", mu,"/L)"))'),
-                 x = 34,
-                 y = -8,
+                 label = expression('bold(paste("F - Chlorophyll (", mu,"g/L)"))'),
+                 x = 33.6,
+                 y = -7.6,
                  size = 9,
                  fontface =2,
                  colour = "black", parse = TRUE) +
@@ -565,7 +573,8 @@ swan_surfR <- function(path, ovit, ocav){
         theme(panel.grid.major = element_blank(),
               panel.grid.minor = element_blank(),
               panel.background = element_blank(),
-              panel.border = element_blank(),
+              #panel.border = element_blank(),
+              panel.border = element_rect(fill = NA, colour = "#CCCCCC"),
               axis.line = element_line(colour = "black"),
               axis.line.x = element_blank(),
               axis.line.y = element_blank(),
@@ -607,7 +616,7 @@ swan_surfR <- function(path, ovit, ocav){
         geom_text_contour(data = idw_list_a[[3]],
                           aes(x=x, y=y, z = Temperature),
                           size = 6,
-                          stroke = 0.2,
+                          #stroke = 0.2,
                           breaks = MakeBreaks(binwidth = 1)) +
         geom_point(data = samp_locs,
                    aes(x = x, y = - y),
@@ -615,8 +624,8 @@ swan_surfR <- function(path, ovit, ocav){
                    size = 0.5) +
         annotate("text",
                  label = expression('bold(paste("Temperature (", degree,"C)"))'),
-                 x = 21,
-                 y = -17,
+                 x = 19,
+                 y = -16.8,
                  size = 9,
                  fontface =2,
                  colour = "black", parse = TRUE) +
@@ -648,10 +657,11 @@ swan_surfR <- function(path, ovit, ocav){
       tempPlotZ <- ggplot()+
         geom_raster(data = idw_list_n[[3]],
                     aes(x=x, y=y, fill = factor(Temperature))) +
-        scale_x_continuous(limits = c(20.85,51.6),
+        scale_x_continuous(limits = c(20.95,51.6),
                            expand = c(0, 0),
                            breaks = c(25, 30, 35, 40, 45, 50)) +
-        scale_y_continuous(expand = expand_scale(mult = c(0, .05)))+
+        scale_y_continuous(breaks = c(-8, -6, -4, -2, 0),
+                           expand = expand_scale(mult = c(0, .05)))+
         stat_contour2(data = idw_list_n[[3]],
                       aes(x=x, y=y, z = Temperature),
                       colour = "grey10",
@@ -664,7 +674,7 @@ swan_surfR <- function(path, ovit, ocav){
         geom_text_contour(data = idw_list_n[[3]],
                           aes(x=x, y=y, z = Temperature),
                           size = 6,
-                          stroke = 0.2,
+                          #stroke = 0.2,
                           breaks = MakeBreaks(binwidth = 1)) +
         geom_point(data = filter(samp_locs, x >= 21),
                    aes(x = x, y = - y),
@@ -672,8 +682,8 @@ swan_surfR <- function(path, ovit, ocav){
                    size = 0.5) +
         annotate("text",
                  label = expression('bold(paste("Temperature (", degree,"C)"))'),
-                 x = 34,
-                 y = -7.7,
+                 x = 33,
+                 y = -7.6,
                  size = 9,
                  fontface =2,
                  colour = "black", parse = TRUE) +
