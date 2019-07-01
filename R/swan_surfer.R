@@ -202,12 +202,12 @@ swan_surfR <- function(path, ovit, ocav){
                           name = "Salinity\n(ppt)") +
         geom_polygon(data = S_bottom,
                      aes(x=x, y=y), fill = "grey90", colour = "grey20") +
-        geom_text_contour(data = idw_list_a[[1]],
-                          aes(x=x, y=y, z = Salinity),
-                          check_overlap = TRUE,
-                          size = 6,
-                          #stroke = 0.2,
-                          breaks = MakeBreaks(binwidth = 2)) +
+        # geom_text_contour(data = idw_list_a[[1]],
+        #                   aes(x=x, y=y, z = Salinity),
+        #                   check_overlap = TRUE,
+        #                   size = 6,
+        #                   #stroke = 0.2,
+        #                   breaks = MakeBreaks(binwidth = 2)) +
         geom_point(data = samp_locs,
                    aes(x = x, y = - y),
                    colour = "black",
@@ -271,12 +271,12 @@ swan_surfR <- function(path, ovit, ocav){
                           name = "") +
         geom_polygon(data = S_bottom_nar,
                      aes(x=x, y=y), fill = "grey90", colour = "grey20") +
-        geom_text_contour(data = idw_list_n[[1]],
-                          aes(x=x, y=y, z = Salinity),
-                          check_overlap = TRUE,
-                          size = 6,
-                          #stroke = 0.2,
-                          breaks = MakeBreaks(binwidth = 2)) +
+        # geom_text_contour(data = idw_list_n[[1]],
+        #                   aes(x=x, y=y, z = Salinity),
+        #                   check_overlap = TRUE,
+        #                   size = 6,
+        #                   #stroke = 0.2,
+        #                   breaks = MakeBreaks(binwidth = 2)) +
         geom_point(data = filter(samp_locs, x >= 21),
                    aes(x = x, y = - y),
                    colour = "black",
@@ -339,13 +339,13 @@ swan_surfR <- function(path, ovit, ocav){
                           name = "") +
         geom_polygon(data = S_bottom,
                      aes(x=x, y=y), fill = "grey90", colour = "grey20") +
-        geom_text_contour(data = idw_list_a[[2]],
-                          aes(x=x, y=y, z = Dissolved_Oxygen),
-                          skip = 1,
-                          check_overlap = TRUE,
-                          size = 6,
-                          #stroke = 0.2,
-                          breaks = MakeBreaks(binwidth = 1)) +
+        # geom_text_contour(data = idw_list_a[[2]],
+        #                   aes(x=x, y=y, z = Dissolved_Oxygen),
+        #                   skip = 1,
+        #                   check_overlap = TRUE,
+        #                   size = 6,
+        #                   #stroke = 0.2,
+        #                   breaks = MakeBreaks(binwidth = 1)) +
         geom_point(data = samp_locs,
                    aes(x = x, y = - y),
                    colour = "black",
@@ -408,13 +408,13 @@ swan_surfR <- function(path, ovit, ocav){
                           name = "") +
         geom_polygon(data = S_bottom_nar,
                      aes(x=x, y=y), fill = "grey90", colour = "grey20") +
-        geom_text_contour(data = idw_list_n[[2]],
-                          aes(x=x, y=y, z = Dissolved_Oxygen),
-                          skip = 1,
-                          check_overlap = TRUE,
-                          size = 6,
-                          #stroke = 0.2,
-                          breaks = MakeBreaks(binwidth = 1)) +
+        # geom_text_contour(data = idw_list_n[[2]],
+        #                   aes(x=x, y=y, z = Dissolved_Oxygen),
+        #                   skip = 1,
+        #                   check_overlap = TRUE,
+        #                   size = 6,
+        #                   #stroke = 0.2,
+        #                   breaks = MakeBreaks(binwidth = 1)) +
         geom_point(data = filter(samp_locs, x >= 21),
                    aes(x = x, y = - y),
                    colour = "black",
@@ -482,13 +482,13 @@ swan_surfR <- function(path, ovit, ocav){
                                      "200", "300", "400", "> 400")) +
         geom_polygon(data = S_bottom,
                      aes(x=x, y=y), fill = "grey90", colour = "grey20") +
-        geom_text_contour(data = idw_list_a[[4]],
-                          aes(x=x, y=y, z = Chlorophyll),
-                          skip = 3,
-                          check_overlap = TRUE,
-                          size = 6,
-                          #stroke = 0.2,
-                          breaks = as.numeric(chl_brk)) +
+        # geom_text_contour(data = idw_list_a[[4]],
+        #                   aes(x=x, y=y, z = Chlorophyll),
+        #                   skip = 3,
+        #                   check_overlap = TRUE,
+        #                   size = 6,
+        #                   #stroke = 0.2,
+        #                   breaks = as.numeric(chl_brk)) +
         geom_point(data = samp_locs,
                    aes(x = x, y = - y),
                    colour = "black",
@@ -550,13 +550,13 @@ swan_surfR <- function(path, ovit, ocav){
                                      "200", "300", "400", "> 400")) +
         geom_polygon(data = S_bottom_nar,
                      aes(x=x, y=y), fill = "grey90", colour = "grey20") +
-        geom_text_contour(data = idw_list_n[[4]],
-                          aes(x=x, y=y, z = Chlorophyll),
-                          skip = 3,
-                          check_overlap = TRUE,
-                          size = 6,
-                          #stroke = 0.2,
-                          breaks = as.numeric(chl_brk)) +
+        # geom_text_contour(data = idw_list_n[[4]],
+        #                   aes(x=x, y=y, z = Chlorophyll),
+        #                   skip = 3,
+        #                   check_overlap = TRUE,
+        #                   size = 6,
+        #                   #stroke = 0.2,
+        #                   breaks = as.numeric(chl_brk)) +
         geom_point(data = filter(samp_locs, x >= 21),
                    aes(x = x, y = - y),
                    colour = "black",
@@ -613,11 +613,11 @@ swan_surfR <- function(path, ovit, ocav){
                           name = "Temp") +
         geom_polygon(data = S_bottom,
                      aes(x=x, y=y), fill = "grey90", colour = "grey20") +
-        geom_text_contour(data = idw_list_a[[3]],
-                          aes(x=x, y=y, z = Temperature),
-                          size = 6,
-                          #stroke = 0.2,
-                          breaks = MakeBreaks(binwidth = 1)) +
+        # geom_text_contour(data = idw_list_a[[3]],
+        #                   aes(x=x, y=y, z = Temperature),
+        #                   size = 6,
+        #                   #stroke = 0.2,
+        #                   breaks = MakeBreaks(binwidth = 1)) +
         geom_point(data = samp_locs,
                    aes(x = x, y = - y),
                    colour = "black",
@@ -671,11 +671,11 @@ swan_surfR <- function(path, ovit, ocav){
                           name = "Temp") +
         geom_polygon(data = S_bottom_nar,
                      aes(x=x, y=y), fill = "grey90", colour = "grey20") +
-        geom_text_contour(data = idw_list_n[[3]],
-                          aes(x=x, y=y, z = Temperature),
-                          size = 6,
-                          #stroke = 0.2,
-                          breaks = MakeBreaks(binwidth = 1)) +
+        # geom_text_contour(data = idw_list_n[[3]],
+        #                   aes(x=x, y=y, z = Temperature),
+        #                   size = 6,
+        #                   #stroke = 0.2,
+        #                   breaks = MakeBreaks(binwidth = 1)) +
         geom_point(data = filter(samp_locs, x >= 21),
                    aes(x = x, y = - y),
                    colour = "black",
