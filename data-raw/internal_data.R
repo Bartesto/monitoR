@@ -314,7 +314,7 @@ gridded(C_grd_all) <- TRUE
 
 
 ## Save out sysdtat.rda
-usethis::use_data(sal_brk, do_mg_l_brk, chl_brk, temp_brkS_sitesdf, C_sitesdf,
+usethis::use_data(sal_brk, do_mg_l_brk, chl_brk, temp_brk, S_sitesdf, C_sitesdf,
                   S_oxy_locs, C_oxy_locs, S_bottom, S_bottom_nar, C_bottom_open,
                   C_bottom_weir, S_grd_all, S_grd_nar, C_grd_low, C_grd_up,
                   C_grd_all, reclass_matrices, internal = TRUE, overwrite = TRUE)
