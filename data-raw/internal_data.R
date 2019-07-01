@@ -158,7 +158,7 @@ reclass_matrices <- list(reclass_mSal = reclass_mSal,
 ## Create colour breaks for metrics
 sal_brk <- as.character(seq(2, 42, 2))
 do_mg_l_brk <- as.character(seq(1, 17, 1))
-chl_brk <- c(as.character(seq(20, 80, 20)), "120", "200", "1000")
+chl_brk <- c(as.character(seq(20, 80, 20)), "120", "160", "200", "300", "400", "1000")
 temp_brk <- as.character(seq(11, 33, 1))
 
 
@@ -314,7 +314,7 @@ gridded(C_grd_all) <- TRUE
 
 
 ## Save out sysdtat.rda
-usethis::use_data(chl_brk, S_sitesdf, C_sitesdf, S_oxy_locs, C_oxy_locs,
-                  S_bottom, S_bottom_nar, C_bottom_open, C_bottom_weir,
-                  S_grd_all, S_grd_nar, C_grd_low, C_grd_up, C_grd_all,
-                  reclass_matrices, internal = TRUE, overwrite = TRUE)
+usethis::use_data(sal_brk, do_mg_l_brk, chl_brk, temp_brkS_sitesdf, C_sitesdf,
+                  S_oxy_locs, C_oxy_locs, S_bottom, S_bottom_nar, C_bottom_open,
+                  C_bottom_weir, S_grd_all, S_grd_nar, C_grd_low, C_grd_up,
+                  C_grd_all, reclass_matrices, internal = TRUE, overwrite = TRUE)
