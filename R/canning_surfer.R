@@ -214,7 +214,7 @@ canning_surfR <- function(path, obac, onic){
       salPlot <- ggplot()+
         geom_raster(data = interp[[1]],
                     aes(x=x, y=y, fill = factor(Salinity))) +
-        scale_x_continuous(limits = c(0.5, 16),
+        scale_x_continuous(limits = c(0.5, 15.95),
                            expand = c(0, 0)) +
         stat_contour2(data = interp[[1]], aes(x=x, y=y, z = Salinity),
                       colour = "grey10",
@@ -222,14 +222,14 @@ canning_surfR <- function(path, obac, onic){
         scale_fill_manual(values = surfer_cols("sal"),
                           guide = guide_legend(reverse=T),
                           name = "Salinity\n(ppt)") +
-        geom_text_contour(data = interp[[1]],
-                          aes(x=x, y=y, z = Salinity),
-                          skip = 1,
-                          size = 6,
-                          check_overlap = TRUE,
-                          stroke = 0.2,
-                          breaks = MakeBreaks(binwidth = 2),
-                          nudge_y = 0.5) +
+        # geom_text_contour(data = interp[[1]],
+        #                   aes(x=x, y=y, z = Salinity),
+        #                   #skip = 1,
+        #                   size = 6,
+        #                   check_overlap = TRUE,
+        #                   #stroke = 0.2,
+        #                   breaks = MakeBreaks(binwidth = 2),
+        #                   nudge_y = 0.5) +
         geom_polygon(data = bottom,
                      aes(x=x, y=y), fill = "grey90", colour = "grey20") +
         geom_point(data = samp_locs,
@@ -244,7 +244,7 @@ canning_surfR <- function(path, obac, onic){
                   check_overlap = TRUE) +
         annotate("text",
                  label = "Salinity (ppt)",
-                 x = 2,
+                 x = 3.65,
                  y = -6.2,
                  size = 9,
                  fontface = 2,
@@ -270,7 +270,7 @@ canning_surfR <- function(path, obac, onic){
               plot.subtitle = element_text(hjust=0.5, vjust=0.5, size = 22),
               legend.background = element_rect(fill = "transparent"),
               legend.direction = "horizontal",
-              legend.position = c(0.3, 0.15),
+              legend.position = c(0.45, 0.15),
               legend.key.size =  unit(8, "mm"),
               legend.title = element_blank(),
               legend.text = element_text(size = 12),
@@ -281,7 +281,7 @@ canning_surfR <- function(path, obac, onic){
       doPlot <- ggplot()+
         geom_raster(data = interp[[2]],
                     aes(x=x, y=y, fill = factor(Dissolved_Oxygen))) +
-        scale_x_continuous(limits = c(0.5, 16),
+        scale_x_continuous(limits = c(0.5, 15.95),
                            expand = c(0, 0)) +
         stat_contour2(data = interp[[2]],
                       aes(x=x, y=y, z = Dissolved_Oxygen),
@@ -290,13 +290,13 @@ canning_surfR <- function(path, obac, onic){
         scale_fill_manual(values = surfer_cols("do"),
                           guide = guide_legend(reverse=T),
                           name = "Dissolved\nOxygen\n(mg/L)") +
-        geom_text_contour(data = interp[[2]],
-                          aes(x=x, y=y, z = Dissolved_Oxygen),
-                          skip = 1,
-                          check_overlap = TRUE,
-                          size = 6,
-                          stroke = 0.2,
-                          breaks = MakeBreaks(binwidth = 1)) + #,nudge_y = 0.5
+        # geom_text_contour(data = interp[[2]],
+        #                   aes(x=x, y=y, z = Dissolved_Oxygen),
+        #                   #skip = 1,
+        #                   check_overlap = TRUE,
+        #                   size = 6,
+        #                   #stroke = 0.2,
+        #                   breaks = MakeBreaks(binwidth = 1)) + #,nudge_y = 0.5
         geom_polygon(data = bottom,
                      aes(x=x, y=y), fill = "grey90", colour = "grey20") +
         geom_point(data = samp_locs,
@@ -311,13 +311,13 @@ canning_surfR <- function(path, obac, onic){
                    shape = 24) +
         annotate("text",
                  label = "Dissolved Oxygen (mg/L)",
-                 x = 2.1,
-                 y = -6.2,
+                 x = 4.2,
+                 y = -6,
                  size = 9,
                  fontface = 2,
                  colour = "black") +
         labs(y = "Depth (m)") +
-        annotation_custom(grob = oxY_grob, xmin = 7, xmax = 10, ymin = -6.3, ymax = -4) +
+        annotation_custom(grob = oxY_grob, xmin = 9.2, xmax = 11.2, ymin = -6.4, ymax = -4.1) +
         theme(panel.grid.major = element_blank(),
               panel.grid.minor = element_blank(),
               panel.background = element_blank(),
@@ -336,7 +336,7 @@ canning_surfR <- function(path, obac, onic){
               plot.subtitle = element_text(hjust=0.5, vjust=0.5),
               legend.background = element_rect(fill = "transparent"),
               legend.direction = "horizontal",
-              legend.position = c(0.3, 0.15),
+              legend.position = c(0.45, 0.15),
               legend.key.size =  unit(8, "mm"),
               legend.title = element_blank(),
               legend.text = element_text(size = 12),
@@ -348,24 +348,26 @@ canning_surfR <- function(path, obac, onic){
         geom_raster(data = interp[[4]],
                     aes(x=x, y=y, fill = factor(Chlorophyll)),
                     alpha = 0.5) +
-        scale_x_continuous(limits = c(0.5, 16),
+        scale_x_continuous(limits = c(0.5, 15.95),
+                           expand = c(0, 0)) +
+        scale_y_continuous(limits = c(-7.1, 0),
                            expand = c(0, 0)) +
         stat_contour2(data = interp[[4]],
                       aes(x=x, y=y, z = Chlorophyll),
-                      colour = "grey70",
+                      colour = "grey10",
                       breaks = chl_brk) +
         scale_fill_manual(values = surfer_cols("chl"),
                           guide = guide_legend(reverse=T),
                           name = "Chlorophyll\n(ug/L)",
                           labels = c("20", "40", "60", "80", "120", "160",
                                      "200", "300", "400", "> 400")) +
-        geom_text_contour(data = interp[[4]],
-                          aes(x=x, y=y, z = Chlorophyll),
-                          skip = 2,
-                          size = 6,
-                          check_overlap = TRUE,
-                          stroke = 0.2,
-                          breaks = as.numeric(chl_brk)) +
+        # geom_text_contour(data = interp[[4]],
+        #                   aes(x=x, y=y, z = Chlorophyll),
+        #                   #skip = 2,
+        #                   size = 6,
+        #                   check_overlap = TRUE,
+        #                   #stroke = 0.2,
+        #                   breaks = as.numeric(chl_brk)) +
         geom_polygon(data = bottom,
                      aes(x=x, y=y), fill = "grey90", colour = "grey20") +
         geom_point(data = samp_locs,
@@ -373,8 +375,8 @@ canning_surfR <- function(path, obac, onic){
                    colour = "black",
                    size = 0.5) +
         annotate("text",
-                 label = expression('bold(paste("Chlorophyll (", mu,"/L)"))'),
-                 x = 2,
+                 label = expression('bold(paste("F - Chlorophyll (", mu,"g/L)"))'),
+                 x = 4,
                  y = -6.2,
                  size = 9,
                  colour = "black", parse = TRUE) +
@@ -383,7 +385,8 @@ canning_surfR <- function(path, obac, onic){
         theme(panel.grid.major = element_blank(),
               panel.grid.minor = element_blank(),
               panel.background = element_blank(),
-              panel.border=element_blank(),
+              #panel.border = element_blank(),
+              panel.border = element_rect(fill = NA, colour = "#CCCCCC"),
               axis.line = element_line(colour = "black"),
               axis.line.x = element_blank(),
               axis.line.y = element_blank(),
@@ -398,7 +401,7 @@ canning_surfR <- function(path, obac, onic){
               plot.subtitle = element_text(hjust=0.5, vjust=0.5),
               legend.background = element_rect(fill = "transparent"),
               legend.direction = "horizontal",
-              legend.position = c(0.3, 0.15),
+              legend.position = c(0.45, 0.15),
               legend.key.size =  unit(8, "mm"),
               legend.title = element_blank(),
               legend.text = element_text(size = 12),
@@ -409,8 +412,9 @@ canning_surfR <- function(path, obac, onic){
       tempPlot <- ggplot()+
         geom_raster(data = interp[[3]],
                     aes(x=x, y=y, fill = factor(Temperature))) +
-        scale_x_continuous(limits = c(0.5, 16),
-                           expand = c(0, 0)) +
+        scale_x_continuous(limits = c(0.5, 15.95),
+                           expand = c(0, 0),
+                           breaks = c(0, 2, 4, 6, 8, 10, 12, 14)) +
         scale_y_continuous(expand = expand_scale(mult = c(0, .05)))+
         stat_contour2(data = interp[[3]],
                       aes(x=x, y=y, z = Temperature),
@@ -419,11 +423,11 @@ canning_surfR <- function(path, obac, onic){
         scale_fill_manual(values = surfer_cols("temp"),
                           guide = guide_legend(reverse=T),
                           name = "Temp") +
-        geom_text_contour(data = interp[[3]],
-                          aes(x=x, y=y, z = Temperature),
-                          size = 6,
-                          stroke = 0.2,
-                          breaks = MakeBreaks(binwidth = 1)) + #,nudge_y = 0.5
+        # geom_text_contour(data = interp[[3]],
+        #                   aes(x=x, y=y, z = Temperature),
+        #                   size = 6,
+        #                   #stroke = 0.2,
+        #                   breaks = MakeBreaks(binwidth = 1)) + #,nudge_y = 0.5
         geom_polygon(data = bottom,
                      aes(x=x, y=y), fill = "grey90", colour = "grey20") +
         geom_point(data = samp_locs,
@@ -432,12 +436,12 @@ canning_surfR <- function(path, obac, onic){
                    size = 0.5) +
         annotate("text",
                  label = expression('bold(paste("Temperature (", degree,"C)"))'),
-                 x = 2,
+                 x = 3.8,
                  y = -6.2,
                  size = 9,
                  fontface = 2,
                  colour = "black", parse = TRUE) +
-        labs(x = "Distance From Entrance (km)",
+        labs(x = "Distance From Canning Bridge (km)",
              y = "") +
         theme(panel.grid.major = element_blank(),
               panel.grid.minor = element_blank(),
@@ -453,7 +457,7 @@ canning_surfR <- function(path, obac, onic){
               panel.border=element_blank(),
               legend.background = element_rect(fill = "transparent"),
               legend.direction = "horizontal",
-              legend.position = c(0.3, 0.15),
+              legend.position = c(0.45, 0.15),
               legend.key.size =  unit(8, "mm"),
               legend.title = element_blank(),
               legend.text = element_text(size = 12),
