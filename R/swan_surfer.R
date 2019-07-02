@@ -170,6 +170,7 @@ swan_surfR <- function(path, ovit, ocav){
       S_oxy_locs$c <- oxy_col
 
       # create mock plot to harvest legend for oxy locs status
+      # maybe move to internal data
       triangle_df <- data.frame(x = c(1, 2, 3), y = 2, stat = c("a", "b", "c"))
       o_plot<- ggplot(triangle_df) +
         geom_point(aes(x = x, y = y, fill = stat), shape = 24, colour = "black") +
@@ -185,6 +186,19 @@ swan_surfR <- function(path, ovit, ocav){
               legend.title = element_text(face="bold")) +
         guides(fill = guide_legend(override.aes = list(size=5)))
       oxY_grob <- gtable_filter(ggplot_gtable(ggplot_build(o_plot)), "guide-box")
+
+      # create df to hold co-ords of black out rectangles for missing data
+      # maybe move to internal data
+      blockdf <- S_sitesdf %>%
+        filter(site != "SRP_RSSA") %>%
+        select(site, dist_mouth) %>%
+        mutate(diff = (dist_mouth - lag(dist_mouth))/1000) %>%
+        mutate(hlf = diff/2, xmin = dist_mouth/1000 - hlf) %>%
+        mutate(xmax = lead(xmin), ymin = -22.1, ymax = 0) %>%
+        select(-diff, -hlf)
+
+      blockdf[1, 3] <- -1
+      blockdf[23, 4] <- 51.6
 
       ## Plots
       salPlot <- ggplot()+
