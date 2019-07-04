@@ -190,12 +190,12 @@ swan_surfR <- function(path, ovit, ocav){
       # create df to hold co-ords of black out rectangles for missing data
       # maybe move to internal data
       blockdf <- S_sitesdf %>%
-        filter(site != "SRP_RSSA") %>%
-        select(site, dist_mouth) %>%
-        mutate(diff = (dist_mouth - lag(dist_mouth))/1000) %>%
-        mutate(hlf = diff/2, xmin = dist_mouth/1000 - hlf) %>%
-        mutate(xmax = lead(xmin), ymin = -22.1, ymax = 0) %>%
-        select(-diff, -hlf)
+        dplyr::filter(site != "SRP_RSSA") %>%
+        dplyr::select(site, dist_mouth) %>%
+        dplyr::mutate(diff = (dist_mouth - lag(dist_mouth))/1000) %>%
+        dplyr::mutate(hlf = diff/2, xmin = dist_mouth/1000 - hlf) %>%
+        dplyr::mutate(xmax = lead(xmin), ymin = -22.1, ymax = 0) %>%
+        dplyr::select(-diff, -hlf)
 
       blockdf[1, 3] <- -1
       blockdf[23, 4] <- 51.6
