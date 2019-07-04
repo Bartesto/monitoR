@@ -350,7 +350,7 @@ canning_surfR <- function(path, obac, onic){
                     alpha = 0.5) +
         scale_x_continuous(limits = c(0.5, 15.95),
                            expand = c(0, 0)) +
-        scale_y_continuous(limits = c(-7.1, 0),
+        scale_y_continuous(limits = c(-7.1, 0.1),
                            expand = c(0, 0)) +
         stat_contour2(data = interp[[4]],
                       aes(x=x, y=y, z = Chlorophyll),
