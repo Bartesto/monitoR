@@ -68,7 +68,7 @@ buff_spdf_all <- as.data.frame(buff_sps_all@polygons[[1]]@Polygons[[1]]@coords)
 b_nar <- data.frame(x = c(20.95 , S_sitesdf[S_sitesdf$dist_mouth/1000 >= 21, 8]/1000,
                           51.6, 51.6, 20.95),
                     y = c(-3.9 , S_sitesdf[S_sitesdf$dist_mouth/1000 >= 21, 9],
-                          -1.9, -10.05, -10.05))
+                          -1.9, -10.15, -10.15))
 
 # convert to spatial poly to allow buffering
 p_nar = Polygon(b_nar)
