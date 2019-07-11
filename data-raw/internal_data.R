@@ -17,6 +17,7 @@ library(lubridate)
 library(tidyxl)
 library(unpivotr)
 library(splancs)
+library(gtable)
 
 #####Swan River
 ## Create site data - locations, depths and distances
@@ -122,21 +123,21 @@ gridded(S_grd_nar) <- TRUE
 # salinity
 aSal <- seq(0, 42, 2)
 bSal <- rep(aSal, each = 3)
-reclass_dfSal <- c(-1, bSal, 44, 44)
+reclass_dfSal <- c(-Inf, bSal, 44, 44)
 reclass_mSal <- matrix(reclass_dfSal,
                        ncol = 3,
                        byrow = TRUE)
 # dissolved oxygen
 aDo <- seq(0, 17, 1)
 bDo <- rep(aDo, each = 3)
-reclass_dfDo <- c(-1, bDo, 18, 18)
+reclass_dfDo <- c(-Inf, bDo, 18, 18)
 reclass_mDo <- matrix(reclass_dfDo,
                       ncol = 3,
                       byrow = TRUE)
 # temperature
 aT <- seq(0, 33, 1)
 bT <- rep(aT, each = 3)
-reclass_dfT <- c(-1, bT, 34, 34)
+reclass_dfT <- c(-Inf, bT, 34, 34)
 reclass_mT <- matrix(reclass_dfT,
                      ncol = 3,
                      byrow = TRUE)
@@ -144,7 +145,7 @@ reclass_mT <- matrix(reclass_dfT,
 aC <- seq(20, 80, 20)
 bC <- rep(aC, each = 3)
 #reclass_dfC <- c(0, bC, 120, 120, 120, 200, 200, 200, 400, 400, 400, 1000, 1000)
-reclass_dfC <- c(0, bC, 120, 120, 120, 160, 160, 160, 200, 200, 200,
+reclass_dfC <- c(-Inf, bC, 120, 120, 120, 160, 160, 160, 200, 200, 200,
                  300, 300, 300, 400, 400, 400, 1000, 1000)
 reclass_mChl <- matrix(reclass_dfC,
                        ncol = 3,
@@ -312,9 +313,25 @@ C_grd_all <- grd3[!splancs::inout(grd3, b_list_all),]
 coordinates(C_grd_all) <- ~x + y
 gridded(C_grd_all) <- TRUE
 
+# mock plot to harvest legend to add to surfers
+triangle_df <- data.frame(x = c(1, 2, 3), y = 2, stat = c("a", "b", "c"))
+o_plot<- ggplot(triangle_df) +
+  geom_point(aes(x = x, y = y, fill = stat), shape = 24, colour = "black") +
+  scale_fill_manual(name = "Oxygen Plant Operational Status",
+                    values = c("green", "blue", "red"),
+                    labels = c("Operable and operating for part or all of the 24 hours\nprior to sampling",
+                               "Operable but not triggered to operate in the 24 hours\nprior to sampling",
+                               "Inoperable for part or all of the 24 hours prior to sampling")) +
+  theme_bw() +
+  theme(legend.key.size = unit(8, "mm"),
+        legend.background = element_blank(),
+        legend.box.background = element_rect(colour = "black", fill = "white"),
+        legend.title = element_text(face="bold")) +
+  guides(fill = guide_legend(override.aes = list(size=5)))
+oxy_grob <- gtable_filter(ggplot_gtable(ggplot_build(o_plot)), "guide-box") #EXPORT TO SYSDATA
 
 ## Save out sysdtat.rda
 usethis::use_data(sal_brk, do_mg_l_brk, chl_brk, temp_brk, S_sitesdf, C_sitesdf,
                   S_oxy_locs, C_oxy_locs, S_bottom, S_bottom_nar, C_bottom_open,
                   C_bottom_weir, S_grd_all, S_grd_nar, C_grd_low, C_grd_up,
-                  C_grd_all, reclass_matrices, internal = TRUE, overwrite = TRUE)
+                  C_grd_all, reclass_matrices, oxy_grob, internal = TRUE, overwrite = TRUE)
