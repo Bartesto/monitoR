@@ -330,8 +330,49 @@ o_plot<- ggplot(triangle_df) +
   guides(fill = guide_legend(override.aes = list(size=5)))
 oxy_grob <- gtable_filter(ggplot_gtable(ggplot_build(o_plot)), "guide-box") #EXPORT TO SYSDATA
 
+# blackout rectangles for missing data scenarios
+# for Swan
+S_blockdf_all <- S_sitesdf %>%
+  filter(site != "SRP_RSSA") %>%
+  select(site, dist_mouth) %>%
+  mutate(diff = (dist_mouth - lag(dist_mouth))/1000) %>%
+  mutate(hlf = diff/2, xmin = dist_mouth/1000 - hlf) %>%
+  mutate(xmax = lead(xmin), ymin = -22.1, ymax = 0) %>%
+  select(-diff, -hlf)
+
+# edits for whole of river
+S_blockdf_all[1, 3] <- -1 #FP1 xmin
+S_blockdf_all[23, 4] <- 51.6 #POL xmax
+
+# edits for narrows up
+S_blockdf_nar <- S_blockdf_all
+S_blockdf_nar[, 5] <- -10.05
+S_blockdf_nar[6, 3] <- 20.95
+
+# for Canning
+C_blockdf_all <- C_sitesdf %>%
+  filter(site != "CRP_RSSA") %>%
+  select(site, dist_bridg) %>%
+  filter(site == "SCB2" | site == "SAL" | site == "RIV" | site == "CASMID" |
+           site == "KEN" | site == "BAC" | site == "NIC" | site == "ELL") %>%
+  mutate(diff = (dist_bridg - lag(dist_bridg))/1000) %>%
+  mutate(hlf = diff/2, xmin = dist_bridg/1000 - hlf) %>%
+  mutate(xmax = lead(xmin), ymin = -7.1, ymax = 0) %>%
+  select(-diff, -hlf)
+
+# edits for whole of river
+C_blockdf_all[1, 3] <- 0.5
+C_blockdf_all[8, 4] <- 15.95
+
+# edits to plot nicely around weir
+C_blockdf_weir <- C_blockdf_all
+C_blockdf_weir[4, 4] <- 11.3 # for CASMID xmax
+C_blockdf_weir[5, 3] <- 11.3 # for KEN xmin
+
+
 ## Save out sysdtat.rda
 usethis::use_data(sal_brk, do_mg_l_brk, chl_brk, temp_brk, S_sitesdf, C_sitesdf,
                   S_oxy_locs, C_oxy_locs, S_bottom, S_bottom_nar, C_bottom_open,
                   C_bottom_weir, S_grd_all, S_grd_nar, C_grd_low, C_grd_up,
-                  C_grd_all, reclass_matrices, oxy_grob, internal = TRUE, overwrite = TRUE)
+                  C_grd_all, reclass_matrices, oxy_grob, S_blockdf_all, S_blockdf_nar,
+                  C_blockdf_all, C_blockdf_weir, internal = TRUE, overwrite = TRUE)
