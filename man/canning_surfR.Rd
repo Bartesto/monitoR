@@ -30,7 +30,7 @@ A pdf format four panel surfer plot of the Canning River.
 \details{
 Surfer plots display a
     cross-section of the river where the metrics of interest have been
-    interpolated between sonde locations. Inverse distance weighting has
+    interpolated between sonde locations. Thin plate spline has
     been used for the interpolation.
 
 A river "bottom" is displayed which puts the interpolation in context.
