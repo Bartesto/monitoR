@@ -3,6 +3,7 @@
 export(canning_surfR)
 export(swan_surfR)
 import(dplyr)
+import(fields)
 import(ggplot2)
 import(ggpubr)
 import(grid)
