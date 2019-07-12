@@ -11,24 +11,19 @@ License: file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports: 
-    raster,
+    dplyr,
+    fields,
     ggplot2,
-    gstat,
-    rgdal,
-    rgeos,
-    sp,
-    scales,
-    tidyverse,
-    janitor,
-    formatR,
     grid,
-    gridExtra,
     gtable,
-    readxl,
     metR,
-    ggpubr,
+    scales,
+    stringr,
+    janitor,
     lubridate,
-    tidyxl,
-    unpivotr,
-    stringr
+    raster,
+    readxl,
+    sp,
+    tidyr,
+    unpivotr
 RoxygenNote: 6.1.1
