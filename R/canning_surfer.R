@@ -40,22 +40,19 @@
 #'
 #' @import dplyr
 #' @importFrom janitor clean_names
-#' @import raster
-#' @importFrom gstat idw
+#' @importFrom raster raster interpolate reclassify rasterToPoints merge
 #' @import ggplot2
 #' @import scales
 #' @import grid
-#' @import gridExtra
 #' @import gtable
 #' @import metR
-#' @import ggpubr
 #' @importFrom lubridate ymd
 #' @importFrom sp coordinates
 #' @import fields
 #'
 #' @export
 # canning_surfR <- function(path, obac, onic){
-#   #suppressWarnings({
+#   #suppressWarnings({@import ggpubr @import gridExtra  @importFrom gstat idw
 #   locations <- data_finder(path, river = "c")
 #
 #   #error handler
@@ -908,7 +905,7 @@ canning_surfR <- function(path, obac, onic){
       plta <- lapply(list(salPlot, doPlot, chlorPlot, tempPlot), ggplotGrob)
       #rbind (i.e. 1 column) size arg matters!
       surfers <- rbind(plta[[1]], plta[[2]], plta[[3]], plta[[4]], size = "first")
-      pdf_name <- paste0(path, "/plots/", "canning_", ymd(samp_date), "_surferf.pdf")
+      pdf_name <- paste0(path, "/plots/", "canning_", ymd(samp_date), "_surfer.pdf")
       cat(paste0(pdf_name,"\n"))
       #add margin padding coarse but effective
       surfers_pad <- gtable::gtable_add_padding(surfers, padding = unit(c(1,4,3,4), "cm"))

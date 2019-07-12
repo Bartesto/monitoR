@@ -43,15 +43,12 @@
 #'
 #' @import dplyr
 #' @importFrom janitor clean_names
-#' @import raster
-#' @importFrom gstat idw
+#' @importFrom raster raster interpolate reclassify rasterToPoints merge
 #' @import ggplot2
 #' @import scales
 #' @import grid
-#' @import gridExtra
 #' @import gtable
 #' @import metR
-#' @import ggpubr
 #' @importFrom lubridate ymd
 #' @importFrom sp coordinates
 #' @import fields
@@ -61,7 +58,7 @@
 #   locations <- data_finder(path, river = "s")
 #
 #   #error handler
-#   if(length(locations) == 2){
+#   if(length(locations) == 2){@importFrom gstat idw @import gridExtra @import ggpubr
 #     data_pairs <- unique(substr(locations, nchar(path)+2, nchar(path)+9))
 #     # make folder for output
 #     folder <- file.path(path, "plots")
