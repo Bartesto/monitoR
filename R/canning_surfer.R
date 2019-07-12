@@ -908,7 +908,7 @@ canning_surfR <- function(path, obac, onic){
       plta <- lapply(list(salPlot, doPlot, chlorPlot, tempPlot), ggplotGrob)
       #rbind (i.e. 1 column) size arg matters!
       surfers <- rbind(plta[[1]], plta[[2]], plta[[3]], plta[[4]], size = "first")
-      pdf_name <- paste0(path, "/plots/", "canning_", ymd(samp_date), "_surferf_TPS.pdf")
+      pdf_name <- paste0(path, "/plots/", "canning_", ymd(samp_date), "_surferf.pdf")
       cat(paste0(pdf_name,"\n"))
       #add margin padding coarse but effective
       surfers_pad <- gtable::gtable_add_padding(surfers, padding = unit(c(1,4,3,4), "cm"))
