@@ -758,7 +758,7 @@
 #
 # }
 
-swan_surfR_TPS <- function(path, ovit, ocav){
+swan_surfR <- function(path, ovit, ocav){
   suppressWarnings({
     locations <- data_finder(path, river = "s")
 
