@@ -51,6 +51,7 @@
 #' @import ggpubr
 #' @importFrom lubridate ymd
 #' @importFrom sp coordinates
+#' @import fields
 #'
 #' @export
 # canning_surfR <- function(path, obac, onic){
