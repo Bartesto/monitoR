@@ -189,13 +189,23 @@ C_bottom_weir <- data.frame(x = c(C_sitesdf$dist_bridg[C_sitesdf$dist_bridg >= 5
                                   -1, -7.1, -7.1),
                             id = 1)
 
+# C_bottom_open <- data.frame(x = c(C_sitesdf$dist_bridg[C_sitesdf$dist_bridg >= 500 & C_sitesdf$dist_bridg <= 11100]/1000,
+#                                   11.2, 11.2, 11.3, 11.3,
+#                                   C_sitesdf$dist_bridg[C_sitesdf$dist_bridg >= 11400]/1000,
+#                                   15.95, 15.95, 0.5),
+#                             y = c(C_sitesdf$adj_depth[C_sitesdf$dist_bridg >= 500 & C_sitesdf$dist_bridg <= 11100],
+#                                   -1.81, -0.5, -0.5, -1.51,
+#                                   C_sitesdf$adj_depth[C_sitesdf$dist_bridg >= 11400],
+#                                   -1, -7.1, -7.1),
+#                             id = 1)
+
 C_bottom_open <- data.frame(x = c(C_sitesdf$dist_bridg[C_sitesdf$dist_bridg >= 500 & C_sitesdf$dist_bridg <= 11100]/1000,
                                   11.2, 11.2, 11.3, 11.3,
-                                  C_sitesdf$dist_bridg[C_sitesdf$dist_bridg >= 11400]/1000,
+                                  C_sitesdf$dist_bridg[C_sitesdf$dist_bridg > 11300]/1000,
                                   15.95, 15.95, 0.5),
                             y = c(C_sitesdf$adj_depth[C_sitesdf$dist_bridg >= 500 & C_sitesdf$dist_bridg <= 11100],
                                   -1.81, -0.5, -0.5, -1.51,
-                                  C_sitesdf$adj_depth[C_sitesdf$dist_bridg >= 11400],
+                                  C_sitesdf$adj_depth[C_sitesdf$dist_bridg > 11300],
                                   -1, -7.1, -7.1),
                             id = 1)
 
@@ -334,11 +344,11 @@ oxy_grob <- gtable_filter(ggplot_gtable(ggplot_build(o_plot)), "guide-box") #EXP
 # for Swan
 S_blockdf_all <- S_sitesdf %>%
   filter(site != "SRP_RSSA") %>%
-  select(site, dist_mouth) %>%
+  dplyr::select(site, dist_mouth) %>%
   mutate(diff = (dist_mouth - lag(dist_mouth))/1000) %>%
   mutate(hlf = diff/2, xmin = dist_mouth/1000 - hlf) %>%
   mutate(xmax = lead(xmin), ymin = -22.1, ymax = 0) %>%
-  select(-diff, -hlf)
+  dplyr::select(-diff, -hlf)
 
 # edits for whole of river
 S_blockdf_all[1, 3] <- -1 #FP1 xmin
@@ -352,13 +362,13 @@ S_blockdf_nar[6, 3] <- 20.95
 # for Canning
 C_blockdf_all <- C_sitesdf %>%
   filter(site != "CRP_RSSA") %>%
-  select(site, dist_bridg) %>%
+  dplyr::select(site, dist_bridg) %>%
   filter(site == "SCB2" | site == "SAL" | site == "RIV" | site == "CASMID" |
            site == "KEN" | site == "BAC" | site == "NIC" | site == "ELL") %>%
   mutate(diff = (dist_bridg - lag(dist_bridg))/1000) %>%
   mutate(hlf = diff/2, xmin = dist_bridg/1000 - hlf) %>%
   mutate(xmax = lead(xmin), ymin = -7.1, ymax = 0) %>%
-  select(-diff, -hlf)
+  dplyr::select(-diff, -hlf)
 
 # edits for whole of river
 C_blockdf_all[1, 3] <- 0.5
