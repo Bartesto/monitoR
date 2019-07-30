@@ -122,10 +122,10 @@ sonde_reader <- function(path){
                           "temp c", "temp °c", "temp øc", "temp", "°c",
                           "odo mg/l", "do+ conc mg/l" , "do mg/l",
                           "sal ppt", "salinity ppt", "sal-ppt",
-                          "depth meters", "depth m", "depth", "dep m",
+                          "vpos m",
                           "chl ug/l", "chlorophyll µg/l", "chlorophyll ug/l", "chlorophyll æg/l")
     replace_with_these <- c(rep("Site", 6), rep("°C", 5), rep("DO mg/L", 3),
-                            rep("SAL-ppt", 3), rep("DEP m", 4), rep("Chl ug/L", 4))
+                            rep("SAL-ppt", 3), rep("DEP m", 1), rep("Chl ug/L", 4))
     found <- match(colnames(dat), search_for_these, nomatch = 0)
     colnames(dat)[colnames(dat) %in% search_for_these] <- replace_with_these[found]
 
