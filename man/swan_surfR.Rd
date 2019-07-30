@@ -28,7 +28,9 @@ Two pdf format four panel surfer plots of the Swan River. One shows
     a four panel (single column) surfer plot of salinity, dissolved oxygen,
     chlorophyll a, and temperature in pdf format. The function creates a
     folder called "plots" in the file path to store the pdf's. Code expects
-    only 2 excel workbooks for one monitoring run.
+    only 2 excel workbooks for one monitoring run. Note sonde data from EXO
+    models reads depth from the VPos metric. All other sonde models use a
+    variant of a depth metric.
 }
 \details{
 Surfer plots display a
