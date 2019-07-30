@@ -1466,7 +1466,8 @@ swan_surfR <- function(path, ovit, ocav){
       ggsave(plot = grid.draw(surfersZ_pad), filename = pdf_nameZs, width=28, height=18)
 
     } else {
-      stop("Function expecting only 2 excel workbooks for one monitoring period")
+      stop(paste0("Function expecting only 2 excel workbooks for one monitoring period, ",
+                  "or perhaps you need the alternate surfR function."))
     }
   })
 

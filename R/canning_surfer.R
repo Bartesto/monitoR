@@ -915,7 +915,8 @@ canning_surfR <- function(path, obac, onic){
       ggsave(plot = grid.draw(surfers_pad), filename = pdf_name, width=28, height=18)
 
     } else {
-      stop("Function expecting only 2 excel workbooks for one monitoring period")
+      stop(paste0("Function expecting only 2 excel workbooks for one monitoring period, ",
+                  "or perhaps you need the alternate surfR function."))
     }
   })
 
