@@ -6,12 +6,12 @@
 #' \code{swan_surfR} takes a file path to Swan River sonde outputs and creates
 #'     a four panel (single column) surfer plot of salinity, dissolved oxygen,
 #'     chlorophyll a, and temperature in pdf format. The function creates a
-#'     folder called "plots" in the file path to store the pdf's. Code expects
+#'     directory called `plots/` in the file path to store the pdf's. Code expects
 #'     only 2 excel workbooks for one monitoring run. Note sonde data from EXO
 #'     models reads depth from the VPos metric. All other sonde models use a
 #'     variant of a depth metric.
 #'
-#' Surfer plots display a
+#' @details Surfer plots display a
 #'     cross-section of the river where the metrics of interest have been
 #'     interpolated between sonde locations. Thin plate spline has
 #'     been used for the interpolation.
@@ -34,7 +34,7 @@
 #' @return Two pdf format four panel surfer plots of the Swan River. One shows
 #'    the full extent of the monitoring run (river mouth to the just beyond the
 #'    site POL - Upper Swan Power Lines). The second shows from the Narrows
-#'    Bridge to site POL.
+#'    Bridge to site POL. Saved to a directory called `plots/`.
 #'
 #' @examples
 #' \dontrun{
