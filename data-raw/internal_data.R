@@ -100,10 +100,10 @@ grd1 <- expand.grid(x = seq(from = x_range[1],
 # create an empty regular grid of values for narrows and up
 grd2 <- expand.grid(x = seq(from = x_range_nar[1],
                             to = x_range_nar[2],
-                            by = 0.1),
+                            by = 0.04),#0.1
                     y = seq(from = y_range_nar[1],
                             to = y_range_nar[2],
-                            by = 0.1))  # expand points to grid
+                            by = 0.04))  # expand points to grid
 
 # create coord lists
 b_list_all <- list(x = buff_spdf_all$x, y = buff_spdf_all$y)
@@ -204,7 +204,7 @@ C_bottom_open <- data.frame(x = c(C_sitesdf$dist_bridg[C_sitesdf$dist_bridg >= 5
                                   C_sitesdf$dist_bridg[C_sitesdf$dist_bridg > 11300]/1000,
                                   15.95, 15.95, 0.5),
                             y = c(C_sitesdf$adj_depth[C_sitesdf$dist_bridg >= 500 & C_sitesdf$dist_bridg <= 11100],
-                                  -1.81, -0.5, -0.5, -1.51,
+                                  -1.81, -0.8, -0.8, -1.51,
                                   C_sitesdf$adj_depth[C_sitesdf$dist_bridg > 11300],
                                   -1, -7.1, -7.1),
                             id = 1)
@@ -280,27 +280,27 @@ all_y_range <- as.numeric(c(-7, 0))  #
 # create an empty grid for lower canning
 grd1 <- expand.grid(x = seq(from = lc_x_range[1],
                             to = lc_x_range[2],
-                            by = 0.02),
+                            by = 0.04),#0.02
                     y = seq(from = lc_y_range[1],
                             to = lc_y_range[2],
-                            by = 0.1))  # expand points to grid
+                            by = 0.04))  # expand points to grid
 
 # create an empty grid for upper canning
 grd2 <- expand.grid(x = seq(from = uc_x_range[1],
                             to = uc_x_range[2],
-                            by = 0.02),
+                            by = 0.04),#0.02
                     y = seq(from = uc_y_range[1],
                             to = uc_y_range[2],
-                            by = 0.1))  # expand points to grid
+                            by = 0.04))  # expand points to grid
 
 
 # create an empty grid for whole of river
 grd3 <- expand.grid(x = seq(from = all_x_range[1],
                             to = all_x_range[2],
-                            by = 0.02),
+                            by = 0.04),#0.02
                     y = seq(from = all_y_range[1],
                             to = all_y_range[2],
-                            by = 0.1))  # expand points to grid
+                            by = 0.04))  # expand points to grid #0.1
 
 
 # create coord lists
