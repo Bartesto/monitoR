@@ -58,7 +58,6 @@
 #'
 #' @export
 #'
-path = "Z:/DEC/SwanCanningRiversMonitoringProgram_SP2018-072/DATA/Working/monitoRtesting/20190729"
 
 swan_surfR <- function(path, ovit, ocav){
   suppressWarnings({
