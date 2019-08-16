@@ -54,8 +54,10 @@
 #' @importFrom lubridate ymd
 #' @importFrom sp coordinates
 #' @import fields
+#' @importFrom stats complete.cases
 #'
 #' @export
+#'
 
 swan_surfR <- function(path, ovit, ocav){
   suppressWarnings({
@@ -71,11 +73,11 @@ swan_surfR <- function(path, ovit, ocav){
       }
       # read in lower data
       lower <- sonde_reader(path = locations[1])
-      lower_clean <- lower[complete.cases(lower), ]
+      lower_clean <- lower[stats::complete.cases(lower), ]
 
       # read in upper data
       upper <- sonde_reader(path = locations[2])
-      upper_clean <- upper[complete.cases(upper), ]
+      upper_clean <- upper[stats::complete.cases(upper), ]
 
       # join and delete and rename prob sites
       samp_data <- dplyr::bind_rows(lower_clean, upper_clean) %>%
@@ -94,10 +96,10 @@ swan_surfR <- function(path, ovit, ocav){
       sparams <- c("Salinity", "Dissolved_Oxygen", "Temperature", "Chlorophyll")
 
       # create interpolations and store in  separate lists
-      d_all <- d_reduced[complete.cases(d_reduced),] %>%
+      d_all <- d_reduced[stats::complete.cases(d_reduced),] %>%
         dplyr::mutate(y = -1 * dep_m, x = dist_mouth/1000)
 
-      d_nar <- d_reduced[complete.cases(d_reduced),] %>%
+      d_nar <- d_reduced[stats::complete.cases(d_reduced),] %>%
         dplyr::mutate(y = -1 * dep_m, x = dist_mouth/1000) %>%
         dplyr::filter(x >= 21)
 
@@ -141,7 +143,7 @@ swan_surfR <- function(path, ovit, ocav){
         tpsmodnar <- fields::Tps(coordinates(d1nar), d1nar$value)
         S_grd_nar_R <- raster::raster(S_grd_nar)
         tps_surfacenar <- raster::interpolate(S_grd_nar_R, tpsmodnar)
-        tps_surfacenar[tps_surfacenar < 0] <- 0 # spline unfortunately interps to neg vals
+        tps_surfacenar[tps_surfacenar < 0] <- 0.1 # spline unfortunately interps to neg vals
 
         idw1_r_classnar <- raster::reclassify(tps_surfacenar, reclass_matrices[[i]])
         idw1_spnar <- raster::rasterToPoints(idw1_r_classnar, spatial = TRUE)
@@ -457,11 +459,15 @@ swan_surfR <- function(path, ovit, ocav){
       # rbind (i.e. 1 column) size arg matters!
       surfers_s <- rbind(plts[[1]], plts[[2]], plts[[3]], plts[[4]], size = "first")
       pdf_name <- paste0(path, "/plots/", "swan_", ymd(samp_date), "_surfer.pdf")
+      png_name <- paste0(path, "/plots/", "swan_", ymd(samp_date), "_surfer.png")
+      jpg_name <- paste0(path, "/plots/", "swan_", ymd(samp_date), "_surfer.jpg")
       cat(paste0(pdf_name,"\n"))
       # add margin padding coarse but effective
       surfers_pads <- gtable::gtable_add_padding(surfers_s, padding = unit(c(1,4,3,4), "cm"))
 
       ggsave(plot = grid.draw(surfers_pads), filename = pdf_name, width=28, height=18)
+      ggsave(plot = grid.draw(surfers_pads), filename = png_name, width=28, height=18, res = 400)
+      ggsave(plot = grid.draw(surfers_pads), filename = jpg_name, width=28, height=18, res = 400)
 
       ## Narrows Up
       # black out areas for plotting _ recalc as deep FP sites screw up narrows plots
@@ -759,11 +765,14 @@ swan_surfR <- function(path, ovit, ocav){
       # rbind (i.e. 1 column) size arg matters!
       surfersZs <- rbind(pltzs[[1]], pltzs[[2]], pltzs[[3]], pltzs[[4]], size = "first")
       pdf_nameZs <- paste0(path, "/plots/", "swan_middle_upper_", lubridate::ymd(samp_date), "_surfer.pdf")
+      png_nameZs <- paste0(path, "/plots/", "swan_middle_upper_", lubridate::ymd(samp_date), "_surfer.png")
+      jpg_nameZs <- paste0(path, "/plots/", "swan_middle_upper_", lubridate::ymd(samp_date), "_surfer.jpg")
       cat(paste0(pdf_nameZs,"\n"))
       # add margin padding coarse but effective
       surfersZ_pad <- gtable::gtable_add_padding(surfersZs, padding = unit(c(1,4,3,4), "cm"))
 
       ggsave(plot = grid.draw(surfersZ_pad), filename = pdf_nameZs, width=28, height=18)
+      ggsave(plot = grid.draw(surfersZ_pad), filename = jpg_nameZs, width=28, height=18, dpi = 400)
 
     } else {
       stop(paste0("Function expecting only 2 excel workbooks for one monitoring period, ",
