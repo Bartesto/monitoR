@@ -487,8 +487,8 @@ canning_surfR <- function(path, obac, onic){
       surfers_pad <- gtable::gtable_add_padding(surfers, padding = unit(c(1,4,3,4), "cm"))
 
       ggsave(plot = grid.draw(surfers_pad), filename = pdf_name, width=28, height=18)
-      ggsave(plot = grid.draw(surfers_pad), filename = png_name, width=28, height=18, res = 400)
-      ggsave(plot = grid.draw(surfers_pad), filename = jpg_name, width=28, height=18, res = 400)
+      ggsave(plot = grid.draw(surfers_pad), filename = png_name, width=28, height=18, dpi = 400)
+      ggsave(plot = grid.draw(surfers_pad), filename = jpg_name, width=28, height=18, dpi = 400)
 
     } else {
       stop(paste0("Function expecting only 2 excel workbooks for one monitoring period, ",

@@ -58,6 +58,7 @@
 #'
 #' @export
 #'
+path = "Z:/DEC/SwanCanningRiversMonitoringProgram_SP2018-072/DATA/Working/monitoRtesting/20190729"
 
 swan_surfR <- function(path, ovit, ocav){
   suppressWarnings({
@@ -466,8 +467,8 @@ swan_surfR <- function(path, ovit, ocav){
       surfers_pads <- gtable::gtable_add_padding(surfers_s, padding = unit(c(1,4,3,4), "cm"))
 
       ggsave(plot = grid.draw(surfers_pads), filename = pdf_name, width=28, height=18)
-      ggsave(plot = grid.draw(surfers_pads), filename = png_name, width=28, height=18, res = 400)
-      ggsave(plot = grid.draw(surfers_pads), filename = jpg_name, width=28, height=18, res = 400)
+      ggsave(plot = grid.draw(surfers_pads), filename = png_name, width=28, height=18, dpi = 400)
+      ggsave(plot = grid.draw(surfers_pads), filename = jpg_name, width=28, height=18, dpi = 400)
 
       ## Narrows Up
       # black out areas for plotting _ recalc as deep FP sites screw up narrows plots
@@ -772,6 +773,7 @@ swan_surfR <- function(path, ovit, ocav){
       surfersZ_pad <- gtable::gtable_add_padding(surfersZs, padding = unit(c(1,4,3,4), "cm"))
 
       ggsave(plot = grid.draw(surfersZ_pad), filename = pdf_nameZs, width=28, height=18)
+      ggsave(plot = grid.draw(surfersZ_pad), filename = png_nameZs, width=28, height=18, dpi = 400)
       ggsave(plot = grid.draw(surfersZ_pad), filename = jpg_nameZs, width=28, height=18, dpi = 400)
 
     } else {
